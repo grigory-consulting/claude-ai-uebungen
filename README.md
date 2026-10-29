@@ -18,5 +18,5 @@ Ein Git-Programm brauchen Sie nicht.
 | `fall/` | Fallunterlagen S01 bis S05 und S07 (Word, PDF, Excel) |
 | `spaeter/` | Unterlage S06, erst auf Aufforderung öffnen |
 | `prompt-vorlagen.md` | Startsammlung für Ihre eigene Prompt-Bibliothek |
-| `wiki-vorlage.md` | Vorlage für die Wiki im Project |
+| `wiki-vorlage.md` | Vorlage für das Wiki im Project |
 | `pruefcheckliste.md` | Checkliste, bevor Sie ein Ergebnis weitergeben |

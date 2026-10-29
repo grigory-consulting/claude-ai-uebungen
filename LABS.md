@@ -9,18 +9,20 @@ Alle Übungen arbeiten mit den Unterlagen im Ordner `fall/`. Sie beschreiben ein
 | `S03-angebot-a.pdf` | Angebot Anbieter A |
 | `S04-angebot-b.pdf` | Angebot Anbieter B |
 | `S05-kriterien.xlsx` | Kriterienliste für die Auswahl |
-| `S07-rahmenvertrag-b.pdf` | Vertragsentwurf von Anbieter B, rund 25 Seiten |
+| `S07-rahmenvertrag-b.pdf` | Vertragsentwurf von Anbieter B, 23 Seiten |
 
 Prompts in Schreibmaschinenschrift können Sie kopieren und anpassen. Bei Aufgaben mit **Tipp vorab** schreiben Sie Ihre Vermutung in den Teams-Chat, bevor Sie Claude fragen. Danach vergleichen Sie.
+
+Die `.md`-Dateien (diese Übungen, `prompt-vorlagen.md`, `pruefcheckliste.md`) lesen Sie am einfachsten auf der Seite des Repositorys im Browser: Datei anklicken. Auf dem Rechner: Rechtsklick → Öffnen mit → Editor.
 
 ---
 
 ## Lab 0 · Anmelden und Unterlagen laden
 
 1. Öffnen Sie claude.ai im Browser und melden Sie sich mit Ihrem Firmenkonto an.
-2. Öffnen Sie die Seite des Übungsrepositorys (Link im Teams-Chat). Wählen Sie **Code** → **Download ZIP** und entpacken Sie die Datei.
-3. Starten Sie einen neuen Chat. Suchen Sie die Schaltfläche zum Anhängen von Dateien und die Schalter für Websuche und Research.
-4. Hängen Sie `S01-projektauftrag.docx` an und fragen Sie:
+2. Öffnen Sie die Seite des Übungsrepositorys (Link im Teams-Chat). Wählen Sie **Code** → **Download ZIP**. Unter Windows: Rechtsklick auf die ZIP-Datei → **Alle extrahieren**.
+3. Starten Sie einen neuen Chat. Suchen Sie die Schaltfläche zum Anhängen von Dateien („+“) und die Einträge für Websuche und Research. Sehen Sie keinen Schalter für die Websuche, schreiben Sie später „Suche im Web:“ an den Anfang des Auftrags.
+4. Hängen Sie `S01-projektauftrag.docx` aus dem entpackten Ordner an und fragen Sie:
 
    `Worum geht es in diesem Dokument? Antworte in einem Satz.`
 
@@ -31,7 +33,7 @@ Fertig, wenn: Claude den Inhalt von S01 in einem Satz wiedergibt.
 ## Lab 1 · Erstes Briefing
 
 1. Neuer Chat. Hängen Sie S01 und S02 an.
-2. **Tipp vorab:** Welche Kontenzahl wird im Briefing stehen?
+2. **Tipp vorab:** Nennt das Briefing einen offenen Punkt? Wenn ja, welchen?
 3. Fragen Sie:
 
    `Fasse die beiden Dokumente in einem kurzen Briefing für die Bereichsleitung zusammen.`
@@ -47,22 +49,22 @@ Fertig, wenn: Sie wissen, ob das erste Briefing einen Widerspruch zwischen den D
 
 ## Lab 2 · Einen Auftrag schärfen
 
-1. Neuer Chat mit S01 und S02. Fragen Sie:
+1. **Tipp vorab:** Sie stellen gleich zweimal fast dieselbe Frage, einmal kurz, einmal ausführlich. Wie viele Punkte der kurzen Antwort lassen sich auf eine Stelle in S01 oder S02 zurückführen: alle, die meisten, wenige?
+2. Neuer Chat mit S01 und S02. Fragen Sie:
 
    `Was muss die Projektleitung jetzt tun?`
 
-2. Neuer Chat mit denselben Dateien. Fragen Sie:
+3. Neuer Chat mit denselben Dateien. Fragen Sie:
 
    ```
    Rolle: Assistenz der Projektleitung bei einer Beschaffung.
-   Ziel: Die Projektleitung soll vor Ablauf der Angebotsfrist wissen, was sie entscheiden oder veranlassen muss.
+   Ziel: Die Projektleitung soll vor dem Angebotsvergleich wissen, was sie entscheiden oder veranlassen muss.
    Kontext: S01 ist der freigegebene Auftrag. S02 ist eine Arbeitsnotiz ohne Änderungsfreigabe.
    Ausgabe: Tabelle mit den Spalten Aufgabe, Wer, Bis wann, Quelle (Dokument und Abschnitt).
    Kriterien: Nur Aufgaben, die sich aus den Dokumenten ergeben. Jede Zeile mit Quelle. Was offen ist, steht als offen da.
    ```
 
-3. **Tipp vorab:** Welche der beiden Antworten enthält mehr Aufgaben, die in keinem der Dokumente stehen?
-4. Vergleichen Sie beide Antworten mit Ihrer Partnerin oder Ihrem Partner im Breakout-Raum. Streichen Sie in der ersten Antwort alles, was sich nicht auf die Dokumente zurückführen lässt.
+4. Zählen Sie mit Ihrer Partnerin oder Ihrem Partner im Breakout-Raum die Punkte der ersten Antwort, die sich nicht auf die Dokumente zurückführen lassen.
 
 Fertig, wenn: Sie benennen können, welche Zeile des zweiten Auftrags den größten Unterschied gemacht hat.
 
@@ -72,8 +74,8 @@ Fertig, wenn: Sie benennen können, welche Zeile des zweiten Auftrags den größ
 
 1. Öffnen Sie `prompt-vorlagen.md` und wählen Sie die Vorlage **Angebot zusammenfassen**, oder schreiben Sie eine eigene mit Platzhaltern in eckigen Klammern.
 2. Neuer Chat mit S03. Setzen Sie die Platzhalter ein und schicken Sie die Vorlage ab.
-3. **Tipp vorab:** Funktioniert dieselbe Vorlage für S04 ohne Änderung?
-4. Neuer Chat mit S04, dieselbe Vorlage. Vergleichen Sie: Fehlt im Ergebnis etwas, das für die Entscheidung wichtig ist?
+3. **Tipp vorab:** Enthält die Tabelle für S04 mit derselben Vorlage alles, was Sie für eine Entscheidung brauchen?
+4. Neuer Chat mit S04, dieselbe Vorlage. Vergleichen Sie beide Tabellen: Was fehlt bei S04?
 5. Ändern Sie die Vorlage so, dass sie für beide Angebote trägt. Speichern Sie sie in Ihrer eigenen Prompt-Bibliothek (eine Textdatei oder ein Dokument reicht).
 
 Fertig, wenn: Ihre Vorlage für beide Angebote ein vollständiges Ergebnis liefert und gespeichert ist.
@@ -82,17 +84,17 @@ Fertig, wenn: Ihre Vorlage für beide Angebote ein vollständiges Ergebnis liefe
 
 ## Lab 4 · Marktübersicht mit Websuche
 
-1. Neuer Chat, Websuche einschalten. Fragen Sie:
+1. **Tipp vorab:** Sie prüfen gleich drei Angaben aus Claudes Tabelle an der verlinkten Quelle. Wie viele davon stehen genau so dort?
+2. Neuer Chat, Websuche einschalten. Fragen Sie:
 
    ```
-   Recherchiere Software für interne Wissensportale, die Service-Teams im deutschsprachigen Raum nutzen.
+   Suche im Web: Software für interne Wissensportale, die Service-Teams im deutschsprachigen Raum nutzen.
    Erstelle eine Tabelle mit 5 Anbietern: Name, Hosting-Region, Exportformate für Artikel, Quelle (Link).
    Nenne danach 5 Fragen, die ein Einkauf vor der Beschaffung an jeden Anbieter stellen sollte.
    Kennzeichne jede Angabe, für die keine Quelle vorliegt.
    ```
 
-2. **Tipp vorab:** Sie prüfen gleich drei Angaben aus der Tabelle. Wie viele davon stehen genau so in der verlinkten Quelle?
-3. Wählen Sie drei Angaben, öffnen Sie jeweils den Link und suchen Sie die Stelle. Notieren Sie: steht dort, steht dort anders, steht dort nicht.
+3. Wählen Sie drei Angaben, öffnen Sie jeweils den Link und suchen Sie die Stelle (Strg+F, oft auf Englisch: „hosting“, „export“). Notieren Sie: steht dort, steht dort anders, steht dort nicht.
 4. Kür: Stellen Sie dieselbe Frage mit **Research** und vergleichen Sie Umfang und Quellen.
 
 Fertig, wenn: Sie für drei Angaben das Ergebnis Ihrer Prüfung notiert haben.
@@ -103,7 +105,9 @@ Fertig, wenn: Sie für drei Angaben das Ergebnis Ihrer Prüfung notiert haben.
 
 **Teil A: Vergleich**
 
-1. Neuer Chat mit S01, S03, S04 und S05. Fragen Sie:
+1. Rechnen Sie zuerst selbst mit den Preisen aus S04: Was kosten bei Anbieter B Einrichtung und zwölf Nutzungsmonate für 30 Konten?
+2. **Tipp vorab:** Kommt Claude auf denselben Betrag?
+3. Neuer Chat mit S01, S03, S04 und S05. Fragen Sie:
 
    ```
    Vergleiche die Angebote S03 und S04 anhand der Kriterien in S05.
@@ -111,12 +115,11 @@ Fertig, wenn: Sie für drei Angaben das Ergebnis Ihrer Prüfung notiert haben.
    Rechne danach die Kosten für Einrichtung und zwölf Nutzungsmonate für 24 und für 30 Konten, mit Rechenweg.
    ```
 
-2. **Tipp vorab:** Welchen Betrag nennt Claude für Anbieter B bei 30 Konten?
-3. Rechnen Sie den Betrag für Anbieter B bei 30 Konten selbst nach, mit den Preisen aus S04. Stimmt er?
+4. Vergleichen Sie Claudes Betrag mit Ihrem. Wenn sie abweichen: Wer hat recht, und warum?
 
 **Teil B: Vertrag**
 
-4. Neuer Chat mit S07. Fragen Sie:
+5. Neuer Chat mit S07. Fragen Sie:
 
    ```
    Werte den Vertragsentwurf für den Auftraggeber aus.
@@ -124,24 +127,24 @@ Fertig, wenn: Sie für drei Angaben das Ergebnis Ihrer Prüfung notiert haben.
    Nenne zu jedem Punkt den Paragraphen oder die Anlage.
    ```
 
-5. Hängen Sie S04 an und fragen Sie: `Weicht der Vertragsentwurf beim Export vom Angebot S04 ab? Zitiere beide Stellen.`
-6. Prüfen Sie zwei Fundstellen im PDF nach.
+6. Hängen Sie S04 an und fragen Sie: `Weicht der Vertragsentwurf beim Export vom Angebot S04 ab? Zitiere beide Stellen.`
+7. Prüfen Sie zwei Fundstellen im PDF nach (Strg+F nach dem Paragraphen, z. B. „§ 13“).
 
-Fertig, wenn: Ihr Kostenbetrag für B bei 30 Konten nachgerechnet ist und Sie zwei Fundstellen aus S07 im Original gefunden haben.
+Fertig, wenn: Ihr Betrag und Claudes Betrag für B bei 30 Konten verglichen sind und Sie zwei Fundstellen aus S07 im Original gefunden haben.
 
 ---
 
 ## Lab 6 · Ergebnisse in andere Formate bringen
 
-Arbeiten Sie im Chat von Lab 5 Teil A weiter.
+Arbeiten Sie im Chat von Lab 5 Teil A weiter (links in der Seitenleiste unter den letzten Chats).
 
-1. **Tipp vorab:** Was geht verloren, wenn Claude den Vergleich auf fünf Sätze kürzt?
+1. **Tipp vorab:** Bleiben in einer Kurzfassung von fünf Sätzen alle Bedingungen aus der Tabelle erhalten?
 2. Fragen Sie: `Schreibe eine Management-Zusammenfassung des Vergleichs in höchstens fünf Sätzen.`
-3. Legen Sie die Zusammenfassung neben die Tabelle. Welche Bedingung oder Einschränkung fehlt?
+3. Legen Sie die Zusammenfassung neben die Tabelle. Fehlt eine Bedingung oder Einschränkung? Wenn ja, welche?
 4. Fragen Sie: `Schreibe eine E-Mail an Anbieter B mit den Fragen, die vor einer Entscheidung beantwortet sein müssen.`
 5. Fragen Sie: `Erstelle eine PowerPoint-Datei mit drei Folien: Ausgangslage, Vergleich, offene Punkte.` Laden Sie die Datei herunter und öffnen Sie sie.
 
-Fertig, wenn: Sie eine fehlende Bedingung benennen können und die PowerPoint-Datei geöffnet haben.
+Fertig, wenn: Sie die Kurzfassung Satz für Satz gegen die Tabelle geprüft und die PowerPoint-Datei geöffnet haben.
 
 ---
 
@@ -152,35 +155,35 @@ Fertig, wenn: Sie eine fehlende Bedingung benennen können und die PowerPoint-Da
 
    ```
    Rolle: Assistenz der Projektleitung bei der Beschaffung eines Wissensportals.
-   Die Dokumente S01 bis S07 sind Originale und werden nie verändert.
+   Die Dokumente im Projektwissen und angehängte Dokumente sind Originale und werden nie verändert.
    Jede Aussage zu Zahlen, Terminen und Zusagen nennt Dokument und Abschnitt.
-   Eine interne Notiz ändert keine Anbieterzusage.
    Offene Punkte stehen als offen da.
    ```
 
-3. Starten Sie im Project einen Chat und fragen Sie:
+3. Starten Sie im Project einen Chat. Hängen Sie `wiki-vorlage.md` an und fragen Sie:
 
-   `Erstelle aus den Projektdokumenten eine Wiki nach der Vorlage in wiki-vorlage.md, Version v1. Erstelle sie als Artifact.`
+   `Erstelle aus den Projektdokumenten ein Wiki nach der angehängten Vorlage, Version v1. Erstelle es als Artifact.`
 
-   (Hängen Sie `wiki-vorlage.md` an.) Prüfen Sie zwei Zahlen am Original. Speichern Sie die Wiki und laden Sie sie als `wiki-v1.md` ins Projektwissen.
-4. Jetzt gibt die Kursleitung `spaeter/S06-aenderung.pdf` frei. **Tipp vorab:** Kann nach S06 noch einer der beiden Anbieter den Pilottermin halten?
-5. Hängen Sie S06 an und fragen Sie:
+   Prüfen Sie zwei Zahlen am Original.
+4. Jetzt gibt die Kursleitung `spaeter/S06-aenderung.pdf` frei. **Tipp vorab:** Trägt Claude im Wiki v2 bei einem Anbieter ein, dass er den neuen Termin halten kann?
+5. Bleiben Sie im selben Chat. Hängen Sie S06 an und fragen Sie:
 
-   `Arbeite S06 in die Wiki ein: Version v2. Markiere ersetzte Angaben, ergänze das Änderungslog und prüfe die Anbietertermine gegen den neuen Bedarf.`
+   `Arbeite S06 in das Wiki ein: Version v2. Markiere ersetzte Angaben, ergänze das Änderungslog und prüfe die Anbietertermine gegen den neuen Bedarf.`
 
-6. Fragen Sie: `Erstelle aus der Wiki v2 eine Entscheidungsvorlage für die Projektleitung als Artifact. Keine Bestellung, nur Empfehlung und offene Fragen.`
+6. Prüfen Sie im Wiki v2 jede Stelle, die S06 betrifft, am Original.
+7. Kür: `Erstelle aus dem Wiki v2 eine Entscheidungsvorlage für die Projektleitung als Artifact. Keine Bestellung, nur Empfehlung und offene Fragen.`
 
-Fertig, wenn: Wiki v2 die neue Kontenzahl und den neuen Termin überall gleich nennt, das Log S06 nennt und die Entscheidungsvorlage keine Anbieterantwort erfindet.
+Fertig, wenn: Wiki v2 jede Änderung aus S06 einheitlich übernimmt, das Log S06 nennt und Sie die Anbietertermine am Original geprüft haben.
 
 ---
 
 ## Lab 8 · Praxisworkshop mit eigener Aufgabe
 
-Nehmen Sie eine Aufgabe aus Ihrem Arbeitsalltag, ohne vertrauliche Daten. Wer keine hat, erstellt aus S01 und S03 eine FAQ für die Pilotgruppe.
+Nehmen Sie eine Aufgabe aus Ihrem Arbeitsalltag, ohne vertrauliche Daten. Wer keine hat, erstellt im Project aus Lab 7 eine FAQ für die Pilotgruppe zum Stand der Beschaffung.
 
 1. Schreiben Sie den Auftrag mit Ziel, Kontext, Ausgabe und Kriterien, oder nehmen Sie eine Vorlage aus Ihrer Prompt-Bibliothek.
-2. Lassen Sie das Ergebnis als Artifact oder als Datei erstellen und verbessern Sie es in zwei Schritten.
-3. Prüfen Sie es mit `pruefcheckliste.md`. Lassen Sie es im Breakout-Raum von einer zweiten Person gegenlesen.
+2. Lassen Sie das Ergebnis als Artifact oder als Datei erstellen und verbessern Sie es in einem Schritt.
+3. Prüfen Sie es mit `pruefcheckliste.md`.
 4. Speichern Sie den Auftrag als Vorlage in Ihrer Prompt-Bibliothek.
 
 Fertig, wenn: Ergebnis und Vorlage gespeichert sind und Sie einen Punkt aus der Checkliste nennen können, an dem Sie nachbessern mussten.

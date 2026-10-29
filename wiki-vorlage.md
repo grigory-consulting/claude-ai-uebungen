@@ -15,7 +15,7 @@ Vorlage für einen fiktiven Schulungsfall. Füllen Sie die Abschnitte anhand der
 
 ## Pflegeregeln
 
-1. Die Ausgangsdokumente bleiben unverändert. Speichern Sie die Wiki getrennt davon.
+1. Die Ausgangsdokumente bleiben unverändert. Speichern Sie das Wiki getrennt davon.
 2. Nennen Sie bei tragenden Aussagen Quellen-ID und Abschnitt. Trennen Sie belegte Angaben, Berechnungen, Annahmen und offene Fragen.
 3. Lösen Sie Widersprüche nur mit einer passenden Freigabe oder Bestätigung. Das Datum allein ist keine Entscheidungsregel.
 4. Prüfen Sie nach einer Änderung alle betroffenen Abschnitte. Markieren Sie ersetzte Aussagen und ergänzen Sie das Log.
