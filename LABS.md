@@ -59,7 +59,7 @@ Fertig, wenn: Sie wissen, ob das erste Briefing einen Widerspruch zwischen den D
    ```
    Rolle: Assistenz der Projektleitung bei einer Beschaffung.
    Ziel: Die Projektleitung soll vor dem Angebotsvergleich wissen, was sie entscheiden oder veranlassen muss.
-   Kontext: S01 ist der freigegebene Auftrag. S02 ist eine Arbeitsnotiz ohne Änderungsfreigabe.
+   Kontext: S01 ist der freigegebene Auftrag. S02 ist das Protokoll einer Besprechung ohne die Projektleitung.
    Ausgabe: Tabelle mit den Spalten Aufgabe, Wer, Bis wann, Quelle (Dokument und Abschnitt).
    Kriterien: Nur Aufgaben, die sich aus den Dokumenten ergeben. Jede Zeile mit Quelle. Was offen ist, steht als offen da.
    ```
