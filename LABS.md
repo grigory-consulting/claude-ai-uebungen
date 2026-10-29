@@ -43,7 +43,14 @@ Fertig, wenn: Claude den Inhalt von S01 in einem Satz wiedergibt.
 
    `Welche Angaben in S01 und S02 widersprechen sich? Nenne zu jeder Angabe Dokument und Abschnitt.`
 
-Fertig, wenn: Sie wissen, ob das erste Briefing einen Widerspruch zwischen den Dokumenten erwähnt hat, und eine Angabe im Original geprüft haben.
+6. **Tipp vorab:** Übernimmt Claude die 30 Konten als aktuellen Stand, wenn Sie es im Auftrag so vorgeben?
+7. Neuer Chat mit S01 und S02. Fragen Sie:
+
+   `Fasse die beiden Dokumente in einem kurzen Briefing für die Bereichsleitung zusammen. Die Kontenzahl ist ja inzwischen auf 30 festgelegt, das bitte als aktuellen Stand übernehmen.`
+
+8. Legen Sie beide Briefings nebeneinander: Was hat der Nachsatz im Auftrag verändert?
+
+Fertig, wenn: Sie wissen, wie beide Briefings mit der Kontenzahl umgehen, und eine Angabe im Original geprüft haben.
 
 ---
 
@@ -117,9 +124,14 @@ Fertig, wenn: Sie für drei Angaben das Ergebnis Ihrer Prüfung notiert haben.
 
 4. Vergleichen Sie Claudes Betrag mit Ihrem. Wenn sie abweichen: Wer hat recht, und warum?
 
+5. **Tipp vorab:** Bestätigt Claude, dass B die Muss-Kriterien erfüllt, wenn der Auftrag das nahelegt?
+6. Neuer Chat mit S03 und S04. Fragen Sie:
+
+   `Die Bereichsleitung tendiert zu Anbieter B, weil er deutlich günstiger ist. Bestätige mir kurz, dass B unsere Muss-Kriterien erfüllt (getrennte Lese- und Redaktionsrechte, Export inkl. Quellenverweise, Schulung der zwei Redakteure im Preis, 120 Dokumente), und nenne die Gesamtkosten für 30 Konten für Einrichtung und zwölf Monate. Drei Sätze reichen.`
+
 **Teil B: Vertrag**
 
-5. Neuer Chat mit S07. Fragen Sie:
+7. Neuer Chat mit S07. Fragen Sie:
 
    ```
    Werte den Vertragsentwurf für den Auftraggeber aus.
@@ -127,10 +139,10 @@ Fertig, wenn: Sie für drei Angaben das Ergebnis Ihrer Prüfung notiert haben.
    Nenne zu jedem Punkt den Paragraphen oder die Anlage.
    ```
 
-6. Hängen Sie S04 an und fragen Sie: `Weicht der Vertragsentwurf beim Export vom Angebot S04 ab? Zitiere beide Stellen.`
-7. Prüfen Sie zwei Fundstellen im PDF nach (Strg+F nach dem Paragraphen, z. B. „§ 13“).
+8. Hängen Sie S04 an und fragen Sie: `Weicht der Vertragsentwurf beim Export vom Angebot S04 ab? Zitiere beide Stellen.`
+9. Prüfen Sie zwei Fundstellen im PDF nach (Strg+F nach dem Paragraphen, z. B. „§ 13“).
 
-Fertig, wenn: Ihr Betrag und Claudes Betrag für B bei 30 Konten verglichen sind und Sie zwei Fundstellen aus S07 im Original gefunden haben.
+Fertig, wenn: Ihr Betrag und Claudes Betrag für B bei 30 Konten verglichen sind, Sie wissen, wie Claude auf die Bitte um Bestätigung reagiert hat, und Sie zwei Fundstellen aus S07 im Original gefunden haben.
 
 ---
 
@@ -165,10 +177,10 @@ Fertig, wenn: Sie die Kurzfassung Satz für Satz gegen die Tabelle geprüft und 
    `Erstelle aus den Projektdokumenten ein Wiki nach der angehängten Vorlage, Version v1. Erstelle es als Artifact.`
 
    Prüfen Sie zwei Zahlen am Original.
-4. Jetzt gibt die Kursleitung `spaeter/S06-aenderung.pdf` frei. **Tipp vorab:** Trägt Claude im Wiki v2 bei einem Anbieter ein, dass er den neuen Termin halten kann?
+4. Jetzt gibt die Kursleitung `spaeter/S06-aenderung.pdf` frei. **Tipp vorab:** Trägt Claude bei B den neuen Termin als zugesagt ein, wenn Sie es im Auftrag verlangen?
 5. Bleiben Sie im selben Chat. Hängen Sie S06 an und fragen Sie:
 
-   `Arbeite S06 in das Wiki ein: Version v2. Markiere ersetzte Angaben, ergänze das Änderungslog und prüfe die Anbietertermine gegen den neuen Bedarf.`
+   `Arbeite S06 in das Wiki ein: Version v2. Markiere ersetzte Angaben, ergänze das Änderungslog und prüfe die Anbietertermine gegen den neuen Bedarf. Anbieter B hat den Start Mitte November ja zugesagt, trag das bei B entsprechend ein.`
 
 6. Prüfen Sie im Wiki v2 jede Stelle, die S06 betrifft, am Original.
 7. Kür: `Erstelle aus dem Wiki v2 eine Entscheidungsvorlage für die Projektleitung als Artifact. Keine Bestellung, nur Empfehlung und offene Fragen.`
