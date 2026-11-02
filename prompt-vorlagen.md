@@ -34,7 +34,7 @@ Kriterien: Nur Angaben aus dem Angebot, jede mit Abschnitt.
 ```
 Vergleiche [Dokument A] und [Dokument B] anhand von [Kriterienliste oder Prüffragen].
 Ausgabe: Tabelle mit einer Zeile je Kriterium, Spalten [A], [B], Fundstelle.
-Kriterien: Unterschiede und fehlende Angaben markieren. Keine Bewertung ohne Beleg. Rechnungen mit Rechenweg.
+Kriterien: Unterschiede und fehlende Angaben markieren. Keine Bewertung ohne Beleg. Berechnungen mit Rechenweg.
 ```
 
 ## Rechercheauftrag

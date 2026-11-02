@@ -10,7 +10,7 @@ Gehen Sie die Punkte durch, bevor Sie ein Ergebnis weitergeben. Streichen Sie, w
 ## Inhalt
 
 - [ ] Jede tragende Zahl, jeder Termin und jede Zusage ist am Original geprüft.
-- [ ] Rechnungen sind selbst nachgerechnet.
+- [ ] Berechnungen sind selbst nachgerechnet.
 - [ ] Bedingungen und Einschränkungen aus dem Original stehen noch drin („nur bei …“, „vorbehaltlich …“).
 - [ ] Widersprüche zwischen Quellen sind genannt, nicht still aufgelöst.
 - [ ] Offenes steht als offen da und ist nicht durch eine plausible Annahme ersetzt.
