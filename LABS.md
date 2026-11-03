@@ -71,7 +71,7 @@ Fertig, wenn: Sie wissen, wie beide Briefings mit der Kontenzahl umgehen, und ei
    Kriterien: Nur Aufgaben, die sich aus den Dokumenten ergeben. Jede Zeile mit Quelle. Was offen ist, steht als offen da.
    ```
 
-4. Zählen Sie mit Ihrer Partnerin oder Ihrem Partner im Breakout-Raum die Punkte der ersten Antwort, die sich nicht auf die Dokumente zurückführen lassen.
+4. Zählen Sie die Punkte der ersten Antwort, die sich nicht auf die Dokumente zurückführen lassen.
 
 Fertig, wenn: Sie benennen können, welche Zeile des zweiten Auftrags den größten Unterschied gemacht hat.
 
