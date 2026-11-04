@@ -1,0 +1,1828 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title></title>
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="css/slides-extended.css" />
+    <link rel="stylesheet" href="dist/theme/white.css" id="theme" />
+    <link rel="stylesheet" href="claude-ai.css" />
+    <link rel="stylesheet" href="plugin/customcontrols/style.css">
+
+
+    <link rel="stylesheet" href="claude-ai.css" />
+
+    <script defer src="dist/fontawesome/all.min.js"></script>
+
+    <script type="text/javascript">
+        function pageInIframe() {
+            return (window.location !== window.parent.location);
+        }
+
+        let forgetPop = true;
+        function onPopState(event) {
+            if(forgetPop){
+                forgetPop = false;
+            } else if( pageInIframe()) {
+                parent.postMessage(event.target.location.href, "app://obsidian.md");
+            }
+        }
+        window.onpopstate = onPopState;
+        window.onmessage = event => {
+            if(event.data == "reload"){
+                window.document.location.reload();
+            }
+            forgetPop = true;
+        }
+
+        function fitElements() {
+            const itemsToFit = document.getElementsByClassName('fitText');
+            for (const item in itemsToFit) {
+                if (Object.hasOwnProperty.call(itemsToFit, item)) {
+                    const element = itemsToFit[item];
+                    fitElement(element, 1, 1000);
+                    element.classList.remove('fitText');
+                }
+            }
+        }
+
+        function fitElement(element, start, end) {
+
+            let size = (end + start) / 2;
+            element.style.fontSize = `${size}px`;
+
+            if (Math.abs(start - end) < 1) {
+                while (element.scrollHeight > element.offsetHeight) {
+                    size--;
+                    element.style.fontSize = `${size}px`;
+                }
+                return;
+            }
+
+            if (element.scrollHeight > element.offsetHeight) {
+                fitElement(element, start, size);
+            } else {
+                fitElement(element, size, end);
+            }
+        }
+
+        document.onreadystatechange = () => {
+            fitElements();
+            if (document.readyState === 'complete') {
+                if (pageInIframe() && window.location.href.indexOf("?export") != -1){
+                    parent.postMessage(event.target.location.href, "app://obsidian.md");
+                }
+                if (window.location.href.indexOf("print-pdf") != -1){
+                    let stateCheck = setInterval(() => {
+                        clearInterval(stateCheck);
+                        window.print();
+                    }, 250);
+                }
+            }
+        };
+    </script>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides"><section ><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="title-slide drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<p class="kicker">Seminar · Claude im Arbeitsalltag</p>
+
+# Claude AI
+
+<p class="subtitle">Recherche, Dokumente, Prompts und Projects produktiv einsetzen</p>
+
+<p class="byline"><span class="author">Dr.-Ing. Grigory Devadze</span><span class="date">2026</span></p>
+
+<div class="numeral">AI</div>
+</div>
+
+</script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<p class="eyebrow">Claude AI</p>
+
+## Was Sie mitnehmen
+
+- &shy;<!-- .element: class="fragment" data-fragment-index="1" -->Aufträge an Claude so formulieren, dass Sie das **Ergebnis prüfen** können 
+- &shy;<!-- .element: class="fragment" data-fragment-index="2" -->Prompts schrittweise verbessern und als **Vorlagen** wiederverwenden 
+- &shy;<!-- .element: class="fragment" data-fragment-index="3" -->**Recherchen** beauftragen und tragende Aussagen an der Quelle prüfen 
+- &shy;<!-- .element: class="fragment" data-fragment-index="4" -->Lange **Dokumente** auswerten, vergleichen und in Berichte, E-Mails und Präsentationen übertragen 
+- &shy;<!-- .element: class="fragment" data-fragment-index="5" -->**Projects** mit Wissensbasis einrichten und Ergebnisse in **Artifacts** weiterentwickeln 
+- &shy;<!-- .element: class="fragment" data-fragment-index="6" -->Fehler erkennen, Zahlen nachrechnen und entscheiden, **welche Daten** Sie Claude geben
+</div></script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<p class="eyebrow">Claude AI</p>
+
+## Ablauf
+
+<div class="numbered">
+
+- &shy;<!-- .element: class="fragment" data-fragment-index="1" -->**Claude im Arbeitsalltag**: wie Sprachmodelle arbeiten, Ökosystem, Einsatz, Vergleich, Chancen und Grenzen 
+- &shy;<!-- .element: class="fragment" data-fragment-index="2" -->**Aufträge und Prompt-Vorlagen**: Rolle, Ziel, Kontext, Ausgabeformat, Kriterien, Wiederverwendung 
+- &shy;<!-- .element: class="fragment" data-fragment-index="3" -->**Recherche und Dokumente**: Quellen prüfen, lange Texte auswerten, Formate übertragen 
+- &shy;<!-- .element: class="fragment" data-fragment-index="4" -->**Projects, Artifacts, Qualität**: Wissensbasis, LLM Wiki, Arbeitsfläche, Datenschutz 
+- &shy;<!-- .element: class="fragment" data-fragment-index="5" -->**Praxisworkshop** mit Ihren eigenen Aufgaben 
+
+</div>
+</div>
+
+</script></section></section><section ><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="section-slide has-dark-background drop" data-background-color="#183b66" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<p class="kicker">Teil I</p>
+
+# Claude im Arbeitsalltag
+
+<div class="numeral">I</div>
+
+Wie ein Sprachmodell arbeitet, was Claude im Chat kann, wie es sich von anderen Assistenten unterscheidet und wo seine Grenzen liegen.
+</div>
+
+</script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="dense drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<p class="eyebrow">Teil I · Claude im Arbeitsalltag</p>
+
+## Wie ein Sprachmodell Text erzeugt
+
+Ein Large Language Model (LLM) ist ein neuronales Netz, das das nächste Stück Text vorhersagt. Claude ist ein solches Modell.
+
+<div class="columns">
+
+<div class="column" style="width: 55%">
+
+- &shy;<!-- .element: class="fragment" data-fragment-index="1" -->**Tokens**: Das Modell zerlegt Text in kurze Stücke (Wortteile, Wörter, Satzzeichen) und arbeitet mit Zahlen statt mit Buchstaben 
+- &shy;<!-- .element: class="fragment" data-fragment-index="2" -->**Nächstes Token**: Für jedes mögliche Token berechnet es aus dem bisherigen Text eine Wahrscheinlichkeit 
+- &shy;<!-- .element: class="fragment" data-fragment-index="3" -->**Wiederholung**: Es wählt ein Token, hängt es an und beginnt von vorn 
+- &shy;<!-- .element: class="fragment" data-fragment-index="4" -->**Training**: Muster aus sehr großen Textmengen; ein zweites Training macht daraus einen Assistenten, der Anweisungen folgt 
+
+</div>
+
+<div class="column fragment" style="width: 45%" data-fragment-index="5">
+
+**Bisheriger Text:** „Vielen Dank für Ihre schnelle …“ (Beispielwerte)
+
+<img src="figs/naechstes-token.png" alt="Balkendiagramm: Antwort 0,52, Rückmeldung 0,27, Hilfe 0,08" style="width: 100%; display: block; margin: 0 auto;">
+
+</div>
+
+</div>
+
+<div class="quelle fragment" data-fragment-index="6">
+
+Quelle: Vaswani et al., <a href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener">Attention Is All You Need</a>, 2017; Ouyang et al., <a href="https://arxiv.org/abs/2203.02155" target="_blank" rel="noopener">Training language models to follow instructions with human feedback</a>, 2022; Bai et al., <a href="https://arxiv.org/abs/2212.08073" target="_blank" rel="noopener">Constitutional AI</a>, 2022
+
+</div>
+</div>
+
+</script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<p class="eyebrow">Teil I · Claude im Arbeitsalltag</p>
+
+## Was daraus für die Arbeit folgt
+
+- &shy;<!-- .element: class="fragment" data-fragment-index="1" -->**Plausibel, nicht geprüft**: Das Modell erzeugt wahrscheinlichen Text, auch Zitate, Zahlen und Fundstellen, die es nicht gibt 
+- &shy;<!-- .element: class="fragment" data-fragment-index="2" -->**Das Modell merkt sich nichts**: Claude schickt bei jeder Nachricht den bisherigen Chat mit; ein neuer Chat beginnt ohne ihn 
+- &shy;<!-- .element: class="fragment" data-fragment-index="3" -->**Begrenzter Kontext**: Je Chat passt nur eine begrenzte Textmenge hinein, lange Dokumente und lange Chats stoßen an die Grenze 
+- &shy;<!-- .element: class="fragment" data-fragment-index="4" -->**Wissensstand mit Stichtag**: Was nach dem Training passiert ist, kennt das Modell nur über die Websuche oder Ihre Dokumente 
+- &shy;<!-- .element: class="fragment" data-fragment-index="5" -->**Streuung**: Dieselbe Frage kann bei jedem Versuch eine andere Antwort ergeben 
+
+<div class="merk fragment" data-fragment-index="6">
+
+Deshalb hängen Sie Dokumente an, verlangen Fundstellen und prüfen das Ergebnis.
+
+</div>
+
+<div class="quelle fragment" data-fragment-index="7">
+
+Quelle: Claude Help Center, <a href="https://support.claude.com/en/articles/8525154-claude-is-providing-incorrect-or-misleading-responses-what-s-going-on" target="_blank" rel="noopener">Claude is providing incorrect or misleading responses</a>, <a href="https://support.claude.com/en/articles/8606394-how-large-is-the-context-window-on-paid-claude-plans" target="_blank" rel="noopener">How large is the context window?</a>
+
+</div>
+</div>
+
+</script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<p class="eyebrow">Teil I · Claude im Arbeitsalltag</p>
+
+## Claude und das Anthropic-Ökosystem
+
+- &shy;<!-- .element: class="fragment" data-fragment-index="1" -->Anthropic entwickelt die Modelle, Claude ist der Assistent, mit dem Sie arbeiten 
+- &shy;<!-- .element: class="fragment" data-fragment-index="2" -->Claude läuft im Browser unter claude.ai, als Desktop-App und auf dem Smartphone 
+- &shy;<!-- .element: class="fragment" data-fragment-index="3" -->Mehrere Modelle stehen zur Wahl: Opus, Sonnet, Haiku und Fable, je Chat einstellbar 
+- &shy;<!-- .element: class="fragment" data-fragment-index="4" -->Im Enterprise-Plan meldet sich jede Person mit dem Firmenkonto an 
+- &shy;<!-- .element: class="fragment" data-fragment-index="5" -->Welche Funktionen verfügbar sind, schaltet Ihre Organisation frei (Rolle „Owner“ in Claude) 
+- &shy;<!-- .element: class="fragment" data-fragment-index="6" -->Zum Enterprise-Zugang gehören auch Claude Code (Softwareentwicklung) und Cowork (geht gerade im Chat auf); beide sind heute nicht Thema 
+
+<div class="quelle fragment" data-fragment-index="7">
+
+Quelle: Claude Help Center, <a href="https://support.claude.com/en/articles/9797531-what-is-the-enterprise-plan" target="_blank" rel="noopener">What is the Enterprise plan?</a>, <a href="https://support.claude.com/en/articles/10684626-enable-and-use-web-search" target="_blank" rel="noopener">Enable and use web search</a>; Anthropic, <a href="https://claude.com/product/cowork" target="_blank" rel="noopener">Claude Cowork</a>
+
+</div>
+</div>
+
+</script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<p class="eyebrow">Teil I · Claude im Arbeitsalltag</p>
+
+## Was Claude im Chat kann
+
+- &shy;<!-- .element: class="fragment" data-fragment-index="1" -->Dateien lesen: PDF, Word, Excel und Bilder anhängen und auswerten 
+- &shy;<!-- .element: class="fragment" data-fragment-index="2" -->Websuche: aktuelle Informationen, jede Antwort mit Quellenlinks 
+- &shy;<!-- .element: class="fragment" data-fragment-index="3" -->Research: mehrere aufeinander aufbauende Suchen, am Ende ein ausführlicher Bericht 
+- &shy;<!-- .element: class="fragment" data-fragment-index="4" -->Dateien erzeugen: Word, Excel, PowerPoint und PDF zum Herunterladen 
+- &shy;<!-- .element: class="fragment" data-fragment-index="5" -->Artifacts: Dokumente, Folien und Checklisten neben dem Chat bearbeiten und teilen 
+- &shy;<!-- .element: class="fragment" data-fragment-index="6" -->Projects: Wissensbasis und Anweisungen für ein Vorhaben, gültig für alle Chats darin 
+
+<div class="quelle fragment" data-fragment-index="7">
+
+Quelle: Claude Help Center, <a href="https://support.claude.com/en/articles/8241126-upload-files-to-claude" target="_blank" rel="noopener">Upload files</a>, <a href="https://support.claude.com/en/articles/10684626-enable-and-use-web-search" target="_blank" rel="noopener">Web search</a>, <a href="https://support.claude.com/en/articles/11088861-use-research-on-claude" target="_blank" rel="noopener">Research</a>, <a href="https://support.claude.com/en/articles/12111783-create-and-edit-files-with-claude" target="_blank" rel="noopener">Create and edit files</a>, <a href="https://support.claude.com/en/articles/17153992-what-are-artifacts-and-how-do-i-use-them" target="_blank" rel="noopener">Artifacts</a>, <a href="https://support.claude.com/en/articles/9519177-how-can-i-create-and-manage-projects" target="_blank" rel="noopener">Projects</a>
+
+</div>
+</div>
+
+</script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="dense drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<p class="eyebrow">Teil I · Claude im Arbeitsalltag</p>
+
+## Claude, ChatGPT, Microsoft Copilot und Gemini
+
+<div class="fragment" data-fragment-index="1">
+
+| Funktion | Claude | ChatGPT | Microsoft Copilot | Gemini |
+|---|---|---|---|---|
+| Websuche mit Quellen | Websuche | Websuche | Copilot Chat über Bing | Gemini-App |
+| Mehrstufige Recherche | Research | Deep research | Researcher¹ | Deep Research |
+| Arbeitskontext je Vorhaben | Projects | Projects | Microsoft Copilot Notebooks | Gems, Gemini Notebook |
+| Arbeitsfläche neben dem Chat | Artifacts | Pages (im Arbeitsbereich Space) | Microsoft Copilot Pages | Canvas |
+| Office-Dateien erzeugen | Word, Excel, PowerPoint, PDF | ChatGPT Work: Word, Excel, PowerPoint | Word-, Excel-, PowerPoint-Agents¹ | Word, Excel, PDF; Folien über Google Slides |
+| Training mit Firmendaten | nein (Standard) | nein (Standard) | nein | nein, je nach Edition |
+
+</div>
+
+<div class="quelle fragment" data-fragment-index="2">
+
+¹ nur mit Microsoft-365-Copilot-Lizenz. Herstellerseiten, abgerufen am 29.10.2026: Anthropic <a href="https://support.claude.com/en/articles/11088861-use-research-on-claude" target="_blank" rel="noopener">Research</a>, <a href="https://support.claude.com/en/articles/9517075-what-are-projects" target="_blank" rel="noopener">Projects</a>; OpenAI <a href="https://help.openai.com/en/articles/10500283-deep-research-in-chatgpt" target="_blank" rel="noopener">Deep research</a>, <a href="https://help.openai.com/en/articles/20001549-getting-started-with-space-in-chatgpt" target="_blank" rel="noopener">Space</a>, <a href="https://help.openai.com/en/articles/20001278-creating-and-editing-documents-spreadsheets-and-presentations-with-chatgpt-work" target="_blank" rel="noopener">ChatGPT Work</a>; Microsoft <a href="https://learn.microsoft.com/en-us/copilot/overview" target="_blank" rel="noopener">Copilot Chat</a>, <a href="https://support.microsoft.com/en-us/topic/get-started-with-researcher-in-microsoft-365-copilot-e63ab760-f3de-4c47-ae87-dad601b0e9c4" target="_blank" rel="noopener">Researcher</a>, <a href="https://support.microsoft.com/en-us/office/365-copilot-app/get-started-with-word-excel-and-powerpoint-agents-in-microsoft-365-copilot" target="_blank" rel="noopener">Agents</a>; Google <a href="https://support.google.com/gemini/answer/14620100?hl=en&co=DASHER._Family%3DBusiness-Enterprise" target="_blank" rel="noopener">Gemini für Arbeitskonten</a>, <a href="https://support.google.com/gemini/answer/16047321?hl=en&co=GENIE.Platform%3DDesktop" target="_blank" rel="noopener">Canvas</a>
+
+</div>
+</div>
+
+</script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<p class="eyebrow">Teil I · Claude im Arbeitsalltag</p>
+
+## Wann welches Werkzeug
+
+<div class="columns">
+
+<div class="column" style="width: 50%">
+
+<div class="fragment" data-fragment-index="1">
+
+**Microsoft Copilot**
+
+- &shy;<!-- .element: class="fragment" data-fragment-index="2" -->Copilot Chat in Outlook, Teams, Edge und im Web 
+- &shy;<!-- .element: class="fragment" data-fragment-index="3" -->Volle Funktion in Word, Excel und PowerPoint nur mit Copilot-Lizenz 
+- &shy;<!-- .element: class="fragment" data-fragment-index="4" -->Ohne Lizenz: Firmendaten nur per Upload, in Outlook oder über Agents 
+
+</div>
+
+</div>
+
+<div class="column" style="width: 50%">
+
+<div class="fragment" data-fragment-index="5">
+
+**Claude**
+
+- &shy;<!-- .element: class="fragment" data-fragment-index="6" -->Mehrere lange Dokumente in einem Chat auswerten und vergleichen 
+- &shy;<!-- .element: class="fragment" data-fragment-index="7" -->Tabellen, Berichte und Office-Dateien mit vorgegebener Struktur 
+- &shy;<!-- .element: class="fragment" data-fragment-index="8" -->Projects und Artifacts für wiederkehrende Arbeit 
+
+</div>
+
+</div>
+
+</div>
+
+<div class="tipp fragment" data-fragment-index="9">
+
+Liegt die Arbeit in Mails, Terminen und Dateien in Microsoft 365, greift Copilot mit Lizenz direkt auf diese Daten zu. Bringen Sie selbst ein Dokumentpaket mit und brauchen Sie ein Ergebnis in fester Form, passt Claude.
+
+</div>
+
+<div class="quelle fragment" data-fragment-index="10">
+
+Quelle: Microsoft Learn, <a href="https://learn.microsoft.com/en-us/copilot/overview" target="_blank" rel="noopener">Overview of Microsoft Copilot Chat</a>, <a href="https://learn.microsoft.com/en-us/copilot/privacy-and-protections" target="_blank" rel="noopener">Copilot Chat Privacy and Protections</a>; Claude Help Center, <a href="https://support.claude.com/en/articles/8241126-upload-files-to-claude" target="_blank" rel="noopener">Upload files</a>, <a href="https://support.claude.com/en/articles/12111783-create-and-edit-files-with-claude" target="_blank" rel="noopener">Create and edit files</a>
+
+</div>
+</div>
+
+</script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<p class="eyebrow">Teil I · Claude im Arbeitsalltag</p>
+
+## Stärken von Claude
+
+<div class="card-grid">
+
+<div class="card fragment" data-fragment-index="1">
+
+<span class="card-title">Analyse</span>
+
+Daten aus Excel- und CSV-Dateien auswerten, Ergebnisse mit Diagrammen darstellen
+
+</div>
+
+<div class="card fragment" data-fragment-index="2">
+
+<span class="card-title">Dokumente</span>
+
+Lange PDFs und Office-Dokumente lesen, bei PDFs auch Abbildungen und Diagramme; mehrere Dateien in einem Chat
+
+</div>
+
+<div class="card fragment" data-fragment-index="3">
+
+<span class="card-title">Strukturierte Ausgaben</span>
+
+Tabellen, Gliederungen, Checklisten; als Word-Dokument, Excel-Tabelle mit Formeln oder PowerPoint
+
+</div>
+
+</div>
+
+<div class="quelle fragment" data-fragment-index="4">
+
+Quelle: Claude Help Center, <a href="https://support.claude.com/en/articles/8241126-upload-files-to-claude" target="_blank" rel="noopener">Upload files</a>, <a href="https://support.claude.com/en/articles/12111783-create-and-edit-files-with-claude" target="_blank" rel="noopener">Create and edit files</a>
+
+</div>
+</div>
+
+</script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="dense drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<p class="eyebrow">Teil I · Claude im Arbeitsalltag</p>
+
+## Chancen und Grenzen
+
+<div class="columns">
+
+<div class="column" style="width: 55%">
+
+<div class="fragment" data-fragment-index="1">
+
+**Chancen**
+
+- &shy;<!-- .element: class="fragment" data-fragment-index="2" -->Erste Fassungen für Texte, E-Mails und Präsentationen; umformulieren, kürzen, übersetzen 
+- &shy;<!-- .element: class="fragment" data-fragment-index="3" -->Lange Dokumente lesen, zusammenfassen und vergleichen 
+- &shy;<!-- .element: class="fragment" data-fragment-index="4" -->Recherchieren mit Quellenlinks, mit Research über viele Suchschritte 
+- &shy;<!-- .element: class="fragment" data-fragment-index="5" -->Excel- und CSV-Daten auswerten, Berechnungen per Code ausführen 
+- &shy;<!-- .element: class="fragment" data-fragment-index="6" -->Fertige Dateien erzeugen: Word, Excel, PowerPoint, PDF 
+- &shy;<!-- .element: class="fragment" data-fragment-index="7" -->Gegenlesen lassen: Lücken, Gegenargumente, offene Fragen 
+
+</div>
+
+</div>
+
+<div class="column" style="width: 45%">
+
+<div class="fragment" data-fragment-index="8">
+
+**Grenzen**
+
+- &shy;<!-- .element: class="fragment" data-fragment-index="9" -->Wissensstand: Trainingsdaten sind nicht aktuell, Neues nur über die Websuche 
+- &shy;<!-- .element: class="fragment" data-fragment-index="10" -->Erfundene Details im sicheren Ton: Zitate und Angaben, die echt aussehen 
+- &shy;<!-- .element: class="fragment" data-fragment-index="11" -->Zahlen: Summen sehen plausibel aus und können falsch sein; Rechenweg verlangen und nachrechnen 
+- &shy;<!-- .element: class="fragment" data-fragment-index="12" -->Kontextgrenze: Ein Chat fasst nur begrenzt viel Text; neue Aufgaben in einem neuen Chat 
+
+</div>
+
+</div>
+
+</div>
+
+<div class="quelle fragment" data-fragment-index="13">
+
+Quelle: Claude Help Center, <a href="https://support.claude.com/en/articles/8241126-upload-files-to-claude" target="_blank" rel="noopener">Upload files</a>, <a href="https://support.claude.com/en/articles/11088861-use-research-on-claude" target="_blank" rel="noopener">Research</a>, <a href="https://support.claude.com/en/articles/12111783-create-and-edit-files-with-claude" target="_blank" rel="noopener">Create and edit files</a>, <a href="https://support.claude.com/en/articles/8525154-claude-is-providing-incorrect-or-misleading-responses-what-s-going-on" target="_blank" rel="noopener">Claude is providing incorrect or misleading responses</a>, <a href="https://support.claude.com/en/articles/8606394-how-large-is-the-context-window-on-paid-claude-plans" target="_blank" rel="noopener">How large is the context window?</a>
+
+</div>
+</div>
+
+</script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="smaller drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<p class="eyebrow">Teil I · Claude im Arbeitsalltag</p>
+
+## Nachbesprechung: Briefing aus zwei Dokumenten
+
+- &shy;<!-- .element: class="fragment" data-fragment-index="1" -->S01 ist der freigegebene Projektauftrag und nennt 24 Konten 
+- &shy;<!-- .element: class="fragment" data-fragment-index="2" -->S02 ist ein Protokoll ohne Projektleitung: Die Serviceleitung legt 30 Konten fest 
+- &shy;<!-- .element: class="fragment" data-fragment-index="3" -->Ein glattes Briefing kann eine Zahl oder beide nennen, ohne zu sagen, dass die Entscheidung offen ist 
+- &shy;<!-- .element: class="fragment" data-fragment-index="4" -->Fragen Sie nach Widersprüchen mit Dokument und Abschnitt, dann prüfen Sie den Konflikt im Original 
+- &shy;<!-- .element: class="fragment" data-fragment-index="5" -->Mit „die Kontenzahl ist ja 30“ im Auftrag übernimmt Claude die 30: Vorgaben im Prompt färben das Ergebnis 
+
+<div class="merk fragment" data-fragment-index="6">
+
+Fragen Sie in jedem Briefing nach Widersprüchen und offenen Punkten, und prüfen Sie jede tragende Zahl im Original.
+
+</div>
+</div>
+
+</script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<p class="eyebrow">Teil I · Claude im Arbeitsalltag</p>
+
+## Zusammenfassung Teil I
+
+- &shy;<!-- .element: class="fragment" data-fragment-index="1" -->Claude läuft im Browser, als Desktop-App und mobil; die Organisation schaltet Funktionen frei 
+- &shy;<!-- .element: class="fragment" data-fragment-index="2" -->Im Chat: Dateien lesen, Websuche, Research, Dateien erzeugen, Artifacts, Projects 
+- &shy;<!-- .element: class="fragment" data-fragment-index="3" -->ChatGPT, Microsoft Copilot und Gemini bieten ähnliche Funktionen unter anderen Namen 
+- &shy;<!-- .element: class="fragment" data-fragment-index="4" -->Die Wahl hängt davon ab, wo Ihre Daten liegen und welche Lizenz Sie haben 
+- &shy;<!-- .element: class="fragment" data-fragment-index="5" -->Grenzen: Wissensstand, erfundene Details im sicheren Ton, ungeprüfte Zahlen, Kontextgrenze 
+- &shy;<!-- .element: class="fragment" data-fragment-index="6" -->Im Briefing Widersprüche und offene Punkte verlangen, Zahlen im Original prüfen
+</div>
+
+</script></section></section><section ><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="section-slide has-dark-background drop" data-background-color="#183b66" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<p class="kicker">Teil II</p>
+
+# Aufträge und Prompt-Vorlagen
+
+<div class="numeral">II</div>
+
+Aufträge so formulieren, dass Sie das Ergebnis prüfen können, und gute Aufträge als Vorlagen wiederverwenden.
+</div>
+
+</script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<p class="eyebrow">Teil II · Aufträge und Prompt-Vorlagen</p>
+
+## Bausteine eines Auftrags
+
+
+<img src="figs/auftrag-bausteine.png" alt="" style="object-fit: scale-down">
+</div>
+
+</script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="smaller drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<p class="eyebrow">Teil II · Aufträge und Prompt-Vorlagen</p>
+
+## Vorher und nachher: eine Einladungsmail
+
+<div class="columns">
+
+<div class="column" style="width: 35%">
+
+<div class="fragment" data-fragment-index="1">
+
+**Vage**
+
+```markdown
+Schreibe eine Einladung
+zum Kick-off.
+```
+
+</div>
+
+</div>
+
+<div class="column" style="width: 65%">
+
+<div class="fragment" data-fragment-index="2">
+
+**Präzise**
+
+```markdown
+Schreibe eine Einladungsmail zum Kick-off
+des Pilotprojekts „Digitale Urlaubsplanung“.
+Rolle: Projektleitung, schreibt an die zwölf
+Personen der Pilotgruppe.
+Ziel: Alle sagen bis Freitag, 6. November, zu
+und wissen, was sie vorbereiten.
+Kontext: Kick-off am Dienstag, 10. November,
+10:00 bis 11:00 Uhr in Teams. Der Pilot läuft
+vier Wochen. Vorbereitung: eigene Urlaubswünsche
+für das erste Quartal notieren.
+Ausgabe: Betreff und höchstens acht Sätze,
+Sie-Form, Termin im ersten Absatz.
+Kriterien: Keine Angaben, die oben nicht stehen.
+Fehlende Angaben als [offen] markieren.
+```
+
+</div>
+
+</div>
+
+</div>
+
+<div class="tipp fragment" data-fragment-index="3">
+
+Prüffrage vor dem Absenden: Könnte eine Kollegin diesen Auftrag ohne Rückfrage erledigen?
+
+</div>
+</div>
+
+</script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="smaller drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<p class="eyebrow">Teil II · Aufträge und Prompt-Vorlagen</p>
+
+## Rolle, Ziel und Kontext
+
+- &shy;<!-- .element: class="fragment" data-fragment-index="1" -->Rolle: legt Sicht, Fachsprache und Schwerpunkte fest, ein Satz genügt 
+- &shy;<!-- .element: class="fragment" data-fragment-index="2" -->Eine Rolle liefert keine Fakten: Zahlen, Termine und Beschlüsse gehören in den Kontext 
+- &shy;<!-- .element: class="fragment" data-fragment-index="3" -->Ziel: wofür das Ergebnis gebraucht wird, von wem, bis wann 
+- &shy;<!-- .element: class="fragment" data-fragment-index="4" -->Kontext: welche Dokumente, mit welchem Status (freigegeben, Entwurf, Notiz) 
+- &shy;<!-- .element: class="fragment" data-fragment-index="5" -->Kontext: was schon entschieden ist und was nicht 
+
+<div class="fragment" data-fragment-index="6">
+
+```markdown
+Rolle: Referentin der Personalabteilung, schreibt für die Bereichsleitungen.
+Ziel: Die Bereichsleitungen entscheiden bis 20. November, ob ihr Bereich am Pilot teilnimmt.
+Kontext: Angehängt sind das Konzept (freigegeben) und die Notiz aus der Abstimmung
+mit dem Betriebsrat (Entwurf, nicht abgestimmt). Der Pilotstart ist noch nicht beschlossen.
+```
+
+</div>
+</div>
+
+</script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<p class="eyebrow">Teil II · Aufträge und Prompt-Vorlagen</p>
+
+## Ausgabeformat und Qualitätskriterien
+
+<div class="columns">
+
+<div class="column" style="width: 45%">
+
+<div class="fragment" data-fragment-index="1">
+
+**Ausgabeformat**
+
+- &shy;<!-- .element: class="fragment" data-fragment-index="2" -->Form: Tabelle mit benannten Spalten, Liste, E-Mail 
+- &shy;<!-- .element: class="fragment" data-fragment-index="3" -->Umfang: höchstens fünf Punkte, eine Seite 
+- &shy;<!-- .element: class="fragment" data-fragment-index="4" -->Dateityp: Word, Excel, PowerPoint oder Artifact 
+
+</div>
+
+</div>
+
+<div class="column" style="width: 55%">
+
+<div class="fragment" data-fragment-index="5">
+
+**Qualitätskriterien**
+
+- &shy;<!-- .element: class="fragment" data-fragment-index="6" -->Fundstellen: „Jede Zahl mit Dokument und Abschnitt“ 
+- &shy;<!-- .element: class="fragment" data-fragment-index="7" -->Offenes: „Was nicht geklärt ist, steht als offen da“ 
+- &shy;<!-- .element: class="fragment" data-fragment-index="8" -->Widersprüche: „Widersprüche zwischen den Dokumenten ausdrücklich nennen“ 
+
+</div>
+
+</div>
+
+</div>
+
+<div class="merk fragment" data-fragment-index="9">
+
+Ein Kriterium taugt, wenn Sie am Ergebnis mit Ja oder Nein prüfen können, ob es erfüllt ist. „Gut und vollständig“ können Sie nicht prüfen, „jede Zeile mit Quelle“ schon.
+
+</div>
+</div>
+
+</script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="dense drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<p class="eyebrow">Teil II · Aufträge und Prompt-Vorlagen</p>
+
+## Nachbesprechung: vager und präziser Auftrag
+
+- &shy;<!-- .element: class="fragment" data-fragment-index="1" -->Der vage Auftrag „Was muss die Projektleitung jetzt tun?“ liefert meist Allgemeines ohne Bezug zu S01 oder S02 
+- &shy;<!-- .element: class="fragment" data-fragment-index="2" -->Die Spalte „Quelle“ macht jede Zeile prüfbar: im Original nachsehen oder streichen 
+- &shy;<!-- .element: class="fragment" data-fragment-index="3" -->„Was offen ist, steht als offen da“: Fristen, die in den Dokumenten fehlen, bleiben sichtbar 
+- &shy;<!-- .element: class="fragment" data-fragment-index="4" -->Die Kontextzeile „S02: Protokoll ohne die Projektleitung“ hält die Kontenzahl als offene Entscheidung fest 
+
+<div class="fragment" data-fragment-index="5">
+
+| Aufgabe | Wer | Bis wann | Quelle |
+|---|---|---|---|
+| Gültige Kontenzahl (24 oder 30) schriftlich bestätigen | Projektleitung | offen | S01 Entscheidung, S02 Nutzerzahl |
+| Angebote vergleichen, Einrichtung und zwölf Monate, mit der gültigen Kontenzahl | offen | offen | S02 Prüfauftrag |
+| Keine Bestellung auslösen | offen | offen | S02 Prüfauftrag |
+
+</div>
+
+<div class="merk fragment" data-fragment-index="6">
+
+Mit Kriterien und Fundstellen prüfen Sie die Antwort Zeile für Zeile.
+
+</div>
+</div>
+
+</script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="smaller drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<p class="eyebrow">Teil II · Aufträge und Prompt-Vorlagen</p>
+
+## Schrittweise zusammenarbeiten
+
+- &shy;<!-- .element: class="fragment" data-fragment-index="1" -->Gliederung zuerst: Aufbau abstimmen, dann ausformulieren lassen 
+- &shy;<!-- .element: class="fragment" data-fragment-index="2" -->Um Rückfragen bitten: Claude fragt nach, bevor es schreibt 
+- &shy;<!-- .element: class="fragment" data-fragment-index="3" -->Gezielt nachsteuern: Abschnitt, Satz oder Spalte nennen, die sich ändern soll 
+- &shy;<!-- .element: class="fragment" data-fragment-index="4" -->Frühere Nachricht bearbeiten: Der Chat verzweigt, die alte Fassung bleibt erhalten 
+- &shy;<!-- .element: class="fragment" data-fragment-index="5" -->Neue Aufgabe in einem neuen Chat beginnen 
+
+<div class="fragment" data-fragment-index="6">
+
+```markdown
+Ich brauche ein Handout zur digitalen Urlaubsplanung für die Pilotgruppe.
+Stelle mir zuerst bis zu drei Fragen, die für das Handout nötig sind.
+Schlage danach eine Gliederung mit höchstens fünf Abschnitten vor. Schreibe erst nach meiner Freigabe.
+```
+
+</div>
+
+<div class="quelle fragment" data-fragment-index="7">
+
+Quelle: Claude Help Center, <a href="https://support.claude.com/en/articles/17153992-what-are-artifacts-and-how-do-i-use-them" target="_blank" rel="noopener">What are artifacts and how do I use them?</a>
+
+</div>
+</div>
+
+</script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="smaller drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<p class="eyebrow">Teil II · Aufträge und Prompt-Vorlagen</p>
+
+## Vorlagen mit Platzhaltern und Prompt-Bibliothek
+
+- &shy;<!-- .element: class="fragment" data-fragment-index="1" -->Platzhalter in eckigen Klammern: [Zielgruppe], [Dokument], [Frist] 
+- &shy;<!-- .element: class="fragment" data-fragment-index="2" -->Ablage: eine Textdatei oder ein Dokument, eine Vorlage je Abschnitt 
+- &shy;<!-- .element: class="fragment" data-fragment-index="3" -->Benennung: Tätigkeit und Gegenstand, etwa „Protokoll auswerten“ 
+- &shy;<!-- .element: class="fragment" data-fragment-index="4" -->Pflege: unter jeder Vorlage Stand und letzte Änderung notieren 
+- &shy;<!-- .element: class="fragment" data-fragment-index="5" -->Im Team: gemeinsame Ablage oder ein geteiltes Project 
+
+<div class="fragment" data-fragment-index="6">
+
+```markdown
+## Protokoll auswerten
+Werte das angehängte Besprechungsprotokoll für [Zielgruppe] aus.
+Ausgabe: Beschlüsse, Aufgaben mit Wer und Bis wann, offene Punkte.
+Kriterien: Jede Aufgabe mit Abschnitt im Protokoll. Was offen ist, steht als offen da.
+Stand: [Datum], geändert: [was und warum]
+```
+
+</div>
+
+<div class="quelle fragment" data-fragment-index="7">
+
+Quelle: Claude Help Center, <a href="https://support.claude.com/en/articles/9519177-how-can-i-create-and-manage-projects" target="_blank" rel="noopener">How can I create and manage projects?</a>
+
+</div>
+</div>
+
+</script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<p class="eyebrow">Teil II · Aufträge und Prompt-Vorlagen</p>
+
+## Zusammenfassung Teil II
+
+- &shy;<!-- .element: class="fragment" data-fragment-index="1" -->Ein Auftrag besteht aus Aufgabe, Rolle, Ziel, Kontext, Ausgabeformat und Qualitätskriterien 
+- &shy;<!-- .element: class="fragment" data-fragment-index="2" -->Die Rolle legt die Sicht fest; Fakten, Status und Entscheidungen stehen im Kontext 
+- &shy;<!-- .element: class="fragment" data-fragment-index="3" -->Qualitätskriterien formulieren Sie so, dass Sie sie am Ergebnis mit Ja oder Nein prüfen 
+- &shy;<!-- .element: class="fragment" data-fragment-index="4" -->Fundstellen und „offen“-Markierungen machen jede Zeile prüfbar 
+- &shy;<!-- .element: class="fragment" data-fragment-index="5" -->Schrittweise arbeiten: Gliederung zuerst, um Rückfragen bitten, gezielt nachsteuern 
+- &shy;<!-- .element: class="fragment" data-fragment-index="6" -->Bewährte Aufträge speichern Sie mit Platzhaltern, Namen und Stand in Ihrer Prompt-Bibliothek
+</div>
+
+</script></section></section><section ><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="section-slide has-dark-background drop" data-background-color="#183b66" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<p class="kicker">Teil III</p>
+
+# Recherche und Dokumente
+
+<div class="numeral">III</div>
+
+Recherchen und lange Dokumente so auswerten lassen, dass Sie jede tragende Aussage an der Quelle wiederfinden.
+</div>
+
+</script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="smaller drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<p class="eyebrow">Teil III · Recherche und Dokumente</p>
+
+## Rechercheauftrag
+
+<div class="columns">
+
+<div class="column" style="width: 46%">
+
+**Was der Auftrag festlegt**
+
+- &shy;<!-- .element: class="fragment" data-fragment-index="1" -->**Frage**: was Sie wissen wollen und wofür 
+- &shy;<!-- .element: class="fragment" data-fragment-index="2" -->**Zeitraum und Region**: zum Beispiel „Stand 2026, DACH-Raum“ 
+- &shy;<!-- .element: class="fragment" data-fragment-index="3" -->**Quellentyp**: Behörde, Hersteller, Fachverband; was nicht zählt 
+- &shy;<!-- .element: class="fragment" data-fragment-index="4" -->**Ausgabe**: Tabelle, Liste oder Text, Link je Angabe 
+
+</div>
+
+<div class="column" style="width: 54%">
+
+<div class="fragment" data-fragment-index="5">
+
+| Modus | Wofür |
+|---|---|
+| Websuche | einzelne Fakten mit aktuellem Stand, wenige Suchen |
+| Nachdenken (Extended Thinking) | Claude überlegt vor der Antwort länger: schwierige Abwägung ohne neue Informationen aus dem Netz |
+| Research | umfassende Recherche: viele aufeinander aufbauende Suchen, ausführlicher Bericht |
+
+</div>
+
+</div>
+
+</div>
+
+<div class="merk fragment" data-fragment-index="6">
+
+Mit Websuche zeigt jede Antwort Quellenangaben. Soll Claude auf jeden Fall suchen, schreiben Sie „Suche im Web“ in den Auftrag.
+
+</div>
+
+<div class="quelle fragment" data-fragment-index="7">
+
+Quelle: Claude Help Center, <a href="https://support.claude.com/en/articles/11095361-when-should-i-use-web-search-extended-thinking-and-research" target="_blank" rel="noopener">When should I use web search, extended thinking, and research?</a>; <a href="https://support.claude.com/en/articles/10684626-enable-and-use-web-search" target="_blank" rel="noopener">Enable and use web search</a>; <a href="https://support.claude.com/en/articles/11088861-use-research-on-claude" target="_blank" rel="noopener">Use research on Claude</a>
+
+</div>
+</div>
+
+</script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="smaller drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<p class="eyebrow">Teil III · Recherche und Dokumente</p>
+
+## Quellen prüfen
+
+
+<img src="figs/quellen-pruefen.png" alt="Prüfschritt für Quellen" style="width: 80%; display: block; margin: 0 auto;">
+
+<div class="columns">
+
+<div class="column" style="width: 50%">
+
+- &shy;<!-- .element: class="fragment" data-fragment-index="1" -->Den Link öffnen und die Stelle suchen, nicht nur den Seitentitel lesen 
+- &shy;<!-- .element: class="fragment" data-fragment-index="2" -->Steht die Aussage dort mit derselben Zahl und Einschränkung? 
+
+</div>
+
+<div class="column" style="width: 50%">
+
+- &shy;<!-- .element: class="fragment" data-fragment-index="3" -->**Datum**: Gilt der Stand noch? 
+- &shy;<!-- .element: class="fragment" data-fragment-index="4" -->**Herkunft**: Behörde, Hersteller, Händler oder Blog? 
+- &shy;<!-- .element: class="fragment" data-fragment-index="5" -->**Interesse**: Wer hat einen Vorteil von der Aussage? 
+
+</div>
+
+</div>
+
+<div class="quelle fragment" data-fragment-index="6">
+
+Quelle: Claude Help Center, <a href="https://support.claude.com/en/articles/8525154-claude-is-providing-incorrect-or-misleading-responses-what-s-going-on" target="_blank" rel="noopener">Claude is providing incorrect or misleading responses</a>; <a href="https://support.claude.com/en/articles/10684626-enable-and-use-web-search" target="_blank" rel="noopener">Enable and use web search</a>
+
+</div>
+</div>
+
+</script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="smaller drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<p class="eyebrow">Teil III · Recherche und Dokumente</p>
+
+## Zusammenfassung, Vergleichstabelle, Marktübersicht
+
+<div class="card-grid">
+
+<div class="card fragment" data-fragment-index="1">
+
+<span class="card-title">Management-Zusammenfassung</span>
+
+Ergebnis zuerst, dann die Begründung; Zielgruppe und Länge vorgeben, offene Punkte gesondert
+
+</div>
+
+<div class="card fragment" data-fragment-index="2">
+
+<span class="card-title">Vergleichstabelle</span>
+
+Eine Zeile je Kriterium, eine Spalte je Option, eine Spalte Quelle; Lücken als „keine Angabe“
+
+</div>
+
+<div class="card fragment" data-fragment-index="3">
+
+<span class="card-title">Marktübersicht</span>
+
+Auswahlregel für die Anbieter nennen, Link und Stand je Zeile, danach offene Fragen
+
+</div>
+
+</div>
+
+<div class="fragment" data-fragment-index="4">
+
+```markdown
+Recherchiere Software für Reisekostenabrechnung im DACH-Raum, Stand 2026.
+Quellen: Herstellerseiten und Preislisten, keine Vergleichsportale.
+Ausgabe: Tabelle mit Anbieter, Schnittstelle zur Buchhaltung, Preismodell, Link.
+- Angaben ohne Quelle kennzeichnen
+- Datum der Quelle nennen, wenn es sichtbar ist
+```
+
+</div>
+</div>
+
+</script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="smaller drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<p class="eyebrow">Teil III · Recherche und Dokumente</p>
+
+## Link und Beleg
+
+- &shy;<!-- .element: class="fragment" data-fragment-index="1" -->Ein Link zeigt, wo Claude gelesen hat, aber nicht, ob die Aussage dort steht 
+- &shy;<!-- .element: class="fragment" data-fragment-index="2" -->Abweichungen können klein sein: andere Zahl, fehlende Einschränkung, älterer Stand 
+- &shy;<!-- .element: class="fragment" data-fragment-index="3" -->Fehlt ein Beleg, soll Claude das sagen, statt die Lücke zu füllen 
+
+<div class="fragment" data-fragment-index="4">
+
+```markdown
+Prüfe die Tabelle gegen die verlinkten Quellen.
+- Zitiere zu jeder Angabe den Satz aus der Quelle
+- Markiere jede Angabe als belegt, abweichend oder ohne Beleg
+- Schreibe „keine Angabe gefunden“, statt eine Lücke zu füllen
+```
+
+</div>
+
+<div class="merk fragment" data-fragment-index="5">
+
+Auch das Zitat prüfen Sie an der Quelle. Claude kann Zitate liefern, die überzeugend aussehen und trotzdem nicht belegt sind.
+
+</div>
+
+<div class="quelle fragment" data-fragment-index="6">
+
+Quelle: Claude Help Center, <a href="https://support.claude.com/en/articles/8525154-claude-is-providing-incorrect-or-misleading-responses-what-s-going-on" target="_blank" rel="noopener">Claude is providing incorrect or misleading responses</a>
+
+</div>
+</div>
+
+</script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="smaller drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<p class="eyebrow">Teil III · Recherche und Dokumente</p>
+
+## PDFs und Office-Dokumente
+
+<div class="columns">
+
+<div class="column" style="width: 50%">
+
+**Was Claude liest**
+
+- &shy;<!-- .element: class="fragment" data-fragment-index="1" -->PDF: den Text, bei kürzeren PDFs auch Bilder, Diagramme und Grafiken 
+- &shy;<!-- .element: class="fragment" data-fragment-index="2" -->Word, Excel und andere Dokumente: den Text; eingebettete Bilder nur per Code-Ausführung, deshalb ausdrücklich danach fragen 
+- &shy;<!-- .element: class="fragment" data-fragment-index="3" -->Seitenangaben im Auftrag: die Seitenzahl im PDF-Betrachter, nicht die gedruckte 
+
+</div>
+
+<div class="column" style="width: 50%">
+
+<div class="fragment" data-fragment-index="4">
+
+**Nach Zweck zusammenfassen**
+
+- &shy;<!-- .element: class="fragment" data-fragment-index="5" -->Für wen und wofür: „für die Projektleitung, die bis Freitag entscheidet“ 
+- &shy;<!-- .element: class="fragment" data-fragment-index="6" -->Was hinein muss: Fristen, Beträge, Pflichten 
+- &shy;<!-- .element: class="fragment" data-fragment-index="7" -->Fundstelle je Punkt: Seite oder Abschnitt 
+
+</div>
+
+</div>
+
+</div>
+
+<div class="merk fragment" data-fragment-index="8">
+
+Sehr große Dateien teilen Sie besser in Abschnitte. Lassen Sie sich zuerst eine Gliederung mit Seitenzahlen geben, dann fragen Sie gezielt nach.
+
+</div>
+
+<div class="quelle fragment" data-fragment-index="9">
+
+Quelle: Claude Help Center, <a href="https://support.claude.com/en/articles/8241126-upload-files-to-claude" target="_blank" rel="noopener">Upload files to Claude</a>; <a href="https://support.claude.com/en/articles/8606394-how-large-is-the-context-window-on-paid-claude-plans" target="_blank" rel="noopener">How large is the context window on paid Claude plans?</a>
+
+</div>
+</div>
+
+</script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="smaller drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<p class="eyebrow">Teil III · Recherche und Dokumente</p>
+
+## Extrahieren und vergleichen
+
+<div class="card-grid">
+
+<div class="card fragment" data-fragment-index="1">
+
+<span class="card-title">Risiken</span>
+
+Was kann teuer, spät oder unmöglich werden? Mit Seite oder Abschnitt
+
+</div>
+
+<div class="card fragment" data-fragment-index="2">
+
+<span class="card-title">Aufgaben</span>
+
+Was, wer, bis wann; fehlt eine Frist, steht dort „offen“
+
+</div>
+
+<div class="card fragment" data-fragment-index="3">
+
+<span class="card-title">Entscheidungen</span>
+
+Was muss jemand festlegen, bevor es weitergeht?
+
+</div>
+
+<div class="card fragment" data-fragment-index="4">
+
+<span class="card-title">Vergleich</span>
+
+Kriterien vorgeben, eine Zeile je Kriterium, Fundstelle je Zelle
+
+</div>
+
+</div>
+
+<div class="tipp fragment" data-fragment-index="5">
+
+Verlangen Sie Fristen und Beträge als wörtliches Zitat. Dann vergleichen Sie Zeichen für Zeichen mit dem Original.
+
+</div>
+</div>
+
+</script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="smaller drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<p class="eyebrow">Teil III · Recherche und Dokumente</p>
+
+## Zahlen nachrechnen
+
+Angebot B (S04), 30 Konten, Einrichtung und zwölf Nutzungsmonate, netto:
+
+| Posten | Rechenweg | Betrag |
+|---|---|---:|
+| Einrichtung | 1.800 EUR einmalig, plus 400 EUR Zuschlag ab 26 Konten (Ziffer 12.6) | 2.200 EUR |
+| Nutzung | 30 Konten × 14 EUR × 12 Monate (Staffelpreis ab 30 Konten, Fußnote 1 im Preisblatt) | 5.040 EUR |
+| Exportpaket | einmalig (Ziffer 6.2); ohne das Paket fehlt der in S01 geforderte Export | 1.200 EUR |
+| **Summe** | | **8.440 EUR** |
+
+- &shy;<!-- .element: class="fragment" data-fragment-index="1" -->Ohne Zuschlag ergibt sich 8.040 EUR, ohne Staffelpreis 8.800 EUR 
+- &shy;<!-- .element: class="fragment" data-fragment-index="2" -->Rechenweg verlangen und jeden Preis an seiner Fundstelle prüfen 
+- &shy;<!-- .element: class="fragment" data-fragment-index="3" -->Berechnungen als Excel-Datei mit Formeln erstellen lassen: jede Zelle bleibt nachprüfbar 
+- &shy;<!-- .element: class="fragment" data-fragment-index="4" -->Vertragsentwurf (S07): Abweichungen vom Angebot mit Paragraph oder Anlage im PDF nachschlagen 
+
+<div class="quelle fragment" data-fragment-index="5">
+
+Quelle: Claude Help Center, <a href="https://support.claude.com/en/articles/12111783-create-and-edit-files-with-claude" target="_blank" rel="noopener">Create and edit files with Claude</a>
+
+</div>
+</div>
+
+</script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="smaller drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<p class="eyebrow">Teil III · Recherche und Dokumente</p>
+
+## Ergebnisse in andere Formate bringen
+
+Claude erstellt Word-, Excel-, PowerPoint- und PDF-Dateien zum Herunterladen.
+
+<div class="fragment" data-fragment-index="1">
+
+| Format | Was Sie vorgeben |
+|---|---|
+| Bericht | Zielgruppe, Gliederung, Länge, Dateityp |
+| E-Mail | Empfänger, Anlass, gewünschte Antwort, Frist, Ton |
+| Präsentation | Folienzahl, Titel und Kernaussage je Folie |
+| FAQ | Wer fragt, Zahl der Fragen, Quelle je Antwort |
+
+</div>
+
+<div class="fragment" data-fragment-index="2">
+
+```markdown
+Erstelle aus der Tabelle oben einen Bericht als Word-Datei.
+- Zielgruppe: Bereichsleitung, höchstens zwei Seiten
+- Gliederung: Ausgangslage, Ergebnis, offene Punkte
+- Quelle zu jeder Zahl im Text
+```
+
+</div>
+
+<div class="quelle fragment" data-fragment-index="3">
+
+Quelle: Claude Help Center, <a href="https://support.claude.com/en/articles/12111783-create-and-edit-files-with-claude" target="_blank" rel="noopener">Create and edit files with Claude</a>
+
+</div>
+</div>
+
+</script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="smaller drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<p class="eyebrow">Teil III · Recherche und Dokumente</p>
+
+## Datenschutz bei Unternehmensdokumenten
+
+- &shy;<!-- .element: class="fragment" data-fragment-index="1" -->Vor dem Hochladen klären: Darf das Dokument nach den Regeln Ihrer Organisation in Claude? 
+- &shy;<!-- .element: class="fragment" data-fragment-index="2" -->Nur hochladen, was die Aufgabe braucht: Auszug statt Gesamtakte, Namen nur, wo nötig 
+- &shy;<!-- .element: class="fragment" data-fragment-index="3" -->Projektwissen sehen alle, mit denen Sie das Project teilen; Ihre Chats darin bleiben privat 
+- &shy;<!-- .element: class="fragment" data-fragment-index="4" -->Ein geteilter Chat-Link zeigt alle Nachrichten bis zum Teilen, auch Artifacts 
+- &shy;<!-- .element: class="fragment" data-fragment-index="5" -->Ein gelöschter Chat verschwindet sofort aus dem Verlauf und in der Regel innerhalb von 30 Tagen aus den Systemen von Anthropic; Ausnahme sind Unterhaltungen, zu denen Sie Feedback gesendet haben 
+
+<div class="quelle fragment" data-fragment-index="6">
+
+Quelle: Claude Help Center, <a href="https://support.claude.com/en/articles/9519189-manage-project-visibility-and-sharing" target="_blank" rel="noopener">Manage project visibility and sharing</a>; Anthropic Privacy Center, <a href="https://privacy.claude.com/en/articles/7996866" target="_blank" rel="noopener">How long do you store my organization’s data?</a>
+
+</div>
+</div>
+
+</script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<p class="eyebrow">Teil III · Recherche und Dokumente</p>
+
+## Zusammenfassung Teil III
+
+<div class="numbered">
+
+- &shy;<!-- .element: class="fragment" data-fragment-index="1" -->Rechercheauftrag mit Frage, Zeitraum, Region, Quellentyp und Ausgabe; den Modus nach der Aufgabe wählen 
+- &shy;<!-- .element: class="fragment" data-fragment-index="2" -->Jede tragende Aussage an der Quelle prüfen, dazu Datum, Herkunft und Interesse 
+- &shy;<!-- .element: class="fragment" data-fragment-index="3" -->Lange Dokumente nach Zweck auswerten, mit Seite oder Abschnitt je Punkt 
+- &shy;<!-- .element: class="fragment" data-fragment-index="4" -->Berechnungen mit Rechenweg verlangen und selbst nachrechnen 
+- &shy;<!-- .element: class="fragment" data-fragment-index="5" -->Beim Umwandeln in Bericht, E-Mail oder Folien Bedingungen und Einschränkungen erhalten 
+- &shy;<!-- .element: class="fragment" data-fragment-index="6" -->Nur hochladen, was die Aufgabe braucht und die Regeln Ihrer Organisation erlauben 
+
+</div>
+</div>
+
+</script></section></section><section ><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="section-slide has-dark-background drop" data-background-color="#183b66" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<p class="kicker">Teil IV</p>
+
+# Projects, Artifacts, Qualität
+
+<div class="numeral">IV</div>
+
+Wissen und Anweisungen in Projects bündeln, Ergebnisse in Artifacts ausarbeiten und vor der Weitergabe prüfen.
+</div>
+
+</script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="smaller drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<p class="eyebrow">Teil IV · Projects, Artifacts, Qualität</p>
+
+## Projects organisieren
+
+<div class="columns">
+
+<div class="column" style="width: 44%">
+
+**Aufbau**
+
+- &shy;<!-- .element: class="fragment" data-fragment-index="1" -->**Wissen**: Dateien und Texte, die Claude in jedem Chat des Projects nutzt 
+- &shy;<!-- .element: class="fragment" data-fragment-index="2" -->**Project Instructions**: Rolle, Regeln und Ausgabeform für alle Chats 
+- &shy;<!-- .element: class="fragment" data-fragment-index="3" -->**Chats**: Was ein Chat erarbeitet, sehen andere Chats nur über das Projektwissen 
+- &shy;<!-- .element: class="fragment" data-fragment-index="4" -->Bei viel Wissen sucht Claude die passenden Stellen heraus, statt alles zu lesen (RAG) 
+
+</div>
+
+<div class="column" style="width: 56%">
+
+<div class="fragment" data-fragment-index="5">
+
+**Ein Project je Vorhaben oder wiederkehrender Aufgabe**
+
+| Bereich | Wissen | Instructions |
+|---|---|---|
+| Kundenprojekt | Auftrag, Protokolle, Angebote | Fundstelle je Zusage, offene Punkte führen |
+| Marketing | Styleguide, Produktblätter | Tonalität, Zielgruppe, Länge |
+| Vertrieb | Preisliste, Referenzen | nur Preise aus der Liste, Stand nennen |
+| Wissensmanagement | Abläufe, FAQ | Quelle je Antwort, Lücken melden |
+
+</div>
+
+</div>
+
+</div>
+
+<div class="quelle fragment" data-fragment-index="6">
+
+Quelle: Claude Help Center, <a href="https://support.claude.com/en/articles/9519177-how-can-i-create-and-manage-projects" target="_blank" rel="noopener">How can I create and manage projects?</a>; <a href="https://support.claude.com/en/articles/11473015-retrieval-augmented-generation-rag-for-projects" target="_blank" rel="noopener">Retrieval augmented generation (RAG) for projects</a>; <a href="https://support.claude.com/en/articles/9519189-manage-project-visibility-and-sharing" target="_blank" rel="noopener">Manage project visibility and sharing</a>
+
+</div>
+</div>
+
+</script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="smaller drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<p class="eyebrow">Teil IV · Projects, Artifacts, Qualität</p>
+
+## LLM Wiki
+
+
+<img src="figs/llm-wiki.png" alt="Arbeitsmuster LLM Wiki" style="width: 70%; display: block; margin: 0 auto;">
+
+<div class="columns">
+
+<div class="column" style="width: 50%">
+
+- &shy;<!-- .element: class="fragment" data-fragment-index="1" -->**Originale** bleiben unverändert, das Sprachmodell (LLM) liest sie nur 
+- &shy;<!-- .element: class="fragment" data-fragment-index="2" -->**Wissensseiten** fassen zusammen und nennen ihre Quelle 
+
+</div>
+
+<div class="column" style="width: 50%">
+
+- &shy;<!-- .element: class="fragment" data-fragment-index="3" -->**Index**: eine Zeile je Seite. **Änderungslog**: was, wann, aus welcher Quelle 
+- &shy;<!-- .element: class="fragment" data-fragment-index="4" -->Claude schreibt und pflegt, Sie wählen die Quellen und prüfen die Änderungen 
+
+</div>
+
+</div>
+
+<div class="quelle fragment" data-fragment-index="5">
+
+Quelle: Andrej Karpathy, <a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f" target="_blank" rel="noopener">LLM Wiki</a> (GitHub Gist)
+
+</div>
+</div>
+
+</script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="smaller drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<p class="eyebrow">Teil IV · Projects, Artifacts, Qualität</p>
+
+## Wissen aktualisieren
+
+<div class="numbered">
+
+- &shy;<!-- .element: class="fragment" data-fragment-index="1" -->Claude zuerst die betroffenen Aussagen nennen lassen: bisher, neu, Beleg 
+- &shy;<!-- .element: class="fragment" data-fragment-index="2" -->Nur die betroffenen Abschnitte ändern, ersetzte Angaben markieren statt löschen 
+- &shy;<!-- .element: class="fragment" data-fragment-index="3" -->Widersprüche als offen markieren, bis jemand mit Befugnis entscheidet 
+- &shy;<!-- .element: class="fragment" data-fragment-index="4" -->Änderungslog ergänzen: Version, Datum, Quelle, geänderte Abschnitte 
+- &shy;<!-- .element: class="fragment" data-fragment-index="5" -->Geprüften Stand als Datei speichern und als neue Version ins Projektwissen laden; die Originale bleiben, wie sie sind 
+
+</div>
+
+<div class="fragment" data-fragment-index="6">
+
+```markdown
+Arbeite die angehängte neue Vorlage in die Prompt-Bibliothek ein, Version v2.
+- Nenne zuerst die betroffenen Seiten mit bisherigem und neuem Stand
+- Ändere nur diese Seiten und markiere Ersetztes
+- Ergänze Index und Änderungslog mit Datum und Quelle
+```
+
+</div>
+
+<div class="quelle fragment" data-fragment-index="7">
+
+Quelle: Andrej Karpathy, <a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f" target="_blank" rel="noopener">LLM Wiki</a> (GitHub Gist); Claude Help Center, <a href="https://support.claude.com/en/articles/9519177-how-can-i-create-and-manage-projects" target="_blank" rel="noopener">How can I create and manage projects?</a>
+
+</div>
+</div>
+
+</script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="smaller drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<p class="eyebrow">Teil IV · Projects, Artifacts, Qualität</p>
+
+## Artifacts als Arbeitsfläche
+
+- &shy;<!-- .element: class="fragment" data-fragment-index="1" -->Ein Artifact öffnet sich neben dem Chat: Text, Bericht, Tabelle, Checkliste, Folien 
+- &shy;<!-- .element: class="fragment" data-fragment-index="2" -->Sie ändern es per Auftrag an Claude oder direkt im Artifact 
+- &shy;<!-- .element: class="fragment" data-fragment-index="3" -->Die Vorlagen Docs, Slides und Design bearbeiten Sie wie ein Dokument 
+- &shy;<!-- .element: class="fragment" data-fragment-index="4" -->Alles Erstellte finden Sie im Bereich „Artifacts“ der Seitenleiste wieder 
+- &shy;<!-- .element: class="fragment" data-fragment-index="5" -->Export: Docs nach Word, PDF und Markdown, Folien nach PowerPoint und PDF 
+
+<div class="merk fragment" data-fragment-index="6">
+
+Claude legt ein Artifact an, wenn der Inhalt für sich steht und Sie ihn weiter bearbeiten oder wiederverwenden wollen. Sie können es auch ausdrücklich verlangen: „als Artifact“.
+
+</div>
+
+<div class="quelle fragment" data-fragment-index="7">
+
+Quelle: Claude Help Center, <a href="https://support.claude.com/en/articles/17153992-what-are-artifacts-and-how-do-i-use-them" target="_blank" rel="noopener">What are artifacts and how do I use them?</a>; <a href="https://support.claude.com/en/articles/16923645" target="_blank" rel="noopener">Get started with Claude Docs</a>
+
+</div>
+</div>
+
+</script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="smaller drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<p class="eyebrow">Teil IV · Projects, Artifacts, Qualität</p>
+
+## Verbessern, Versionen, Teilen
+
+<div class="columns">
+
+<div class="column" style="width: 50%">
+
+**Verbessern**
+
+- &shy;<!-- .element: class="fragment" data-fragment-index="1" -->Stelle markieren, „Edit with Claude“ wählen, Änderung beschreiben 
+- &shy;<!-- .element: class="fragment" data-fragment-index="2" -->In Docs: Kommentar mit @Claude; Claude antwortet im Kommentar und ändert die Stelle 
+- &shy;<!-- .element: class="fragment" data-fragment-index="3" -->Docs führen einen Versionsverlauf; jede Änderung ist der Person oder Claude zugeordnet 
+
+</div>
+
+<div class="column" style="width: 50%">
+
+<div class="fragment" data-fragment-index="4">
+
+**Teilen**
+
+- &shy;<!-- .element: class="fragment" data-fragment-index="5" -->Artifacts sind zuerst privat 
+- &shy;<!-- .element: class="fragment" data-fragment-index="6" -->Teilen innerhalb der Organisation; nach außen nur, wenn Ihre Administration es erlaubt 
+- &shy;<!-- .element: class="fragment" data-fragment-index="7" -->Docs bleiben im Enterprise-Plan in der Organisation 
+
+</div>
+
+</div>
+
+</div>
+
+<div class="warn fragment" data-fragment-index="8">
+
+Ein Artifact kann Eingaben speichern, etwa eine Umfrage oder eine Liste zum Abhaken, persönlich oder gemeinsam. Bei gemeinsamem Speicher sehen alle Nutzer des Artifacts Ihre Eingaben: vor dem Eintragen sensibler Daten prüfen.
+
+</div>
+
+<div class="quelle fragment" data-fragment-index="9">
+
+Quelle: Claude Help Center, <a href="https://support.claude.com/en/articles/17153992-what-are-artifacts-and-how-do-i-use-them" target="_blank" rel="noopener">What are artifacts and how do I use them?</a>; <a href="https://support.claude.com/en/articles/16923645" target="_blank" rel="noopener">Get started with Claude Docs</a>; <a href="https://support.claude.com/en/articles/16994751" target="_blank" rel="noopener">Artifacts admin guide for Team and Enterprise plans</a>
+
+</div>
+</div>
+
+</script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="smaller drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<p class="eyebrow">Teil IV · Projects, Artifacts, Qualität</p>
+
+## Halluzinationen erkennen
+
+<div class="card-grid">
+
+<div class="card fragment" data-fragment-index="1">
+
+<span class="card-title">Zitate und Fundstellen</span>
+
+Sehen genau aus und können trotzdem erfunden oder falsch zugeordnet sein: Stelle aufschlagen
+
+</div>
+
+<div class="card fragment" data-fragment-index="2">
+
+<span class="card-title">Zahlen</span>
+
+Summen, Mengen, Zeiträume: nachrechnen, Größenordnung prüfen
+
+</div>
+
+<div class="card fragment" data-fragment-index="3">
+
+<span class="card-title">Aktuelles</span>
+
+Versionen, Preise, Personen: Websuche nutzen, Datum der Quelle ansehen
+
+</div>
+
+<div class="card fragment" data-fragment-index="4">
+
+<span class="card-title">Glatte Antwort</span>
+
+Kein Widerspruch, nichts offen: nach Widersprüchen und offenen Punkten fragen
+
+</div>
+
+</div>
+
+<div class="fragment" data-fragment-index="5">
+
+```markdown
+Prüfe das folgende Ergebnis gegen die angehängten Originale.
+- Liste jede Aussage, die so nicht in den Originalen steht
+- Liste jede Zahl, die sich nicht nachrechnen lässt
+```
+
+</div>
+
+<div class="quelle fragment" data-fragment-index="6">
+
+Quelle: Claude Help Center, <a href="https://support.claude.com/en/articles/8525154-claude-is-providing-incorrect-or-misleading-responses-what-s-going-on" target="_blank" rel="noopener">Claude is providing incorrect or misleading responses</a>
+
+</div>
+</div>
+
+</script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="smaller drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<p class="eyebrow">Teil IV · Projects, Artifacts, Qualität</p>
+
+## Sensible Informationen schützen
+
+<div class="columns">
+
+<div class="column" style="width: 52%">
+
+**Datennutzung im Enterprise-Plan**
+
+- &shy;<!-- .element: class="fragment" data-fragment-index="1" -->Standardmäßig kein Training mit Ihren Ein- und Ausgaben 
+- &shy;<!-- .element: class="fragment" data-fragment-index="2" -->Ausnahme Feedback: Daumen hoch oder runter gibt die ganze Unterhaltung zum Training frei; Anthropic speichert sie bis zu fünf Jahre 
+- &shy;<!-- .element: class="fragment" data-fragment-index="3" -->Chats bleiben gespeichert, bis Sie sie löschen oder eine Aufbewahrungsfrist Ihrer Organisation greift 
+
+</div>
+
+<div class="column" style="width: 48%">
+
+<div class="fragment" data-fragment-index="4">
+
+**Was trotzdem nicht in den Chat gehört**
+
+- &shy;<!-- .element: class="fragment" data-fragment-index="5" -->Passwörter, Zugangsdaten, Schlüssel 
+- &shy;<!-- .element: class="fragment" data-fragment-index="6" -->Daten über der Schutzstufe, die Ihre Organisation für Claude freigibt 
+- &shy;<!-- .element: class="fragment" data-fragment-index="7" -->Personenbezogene Daten, die die Aufgabe nicht braucht 
+- &shy;<!-- .element: class="fragment" data-fragment-index="8" -->Vertrauliches von Dritten ohne deren Freigabe 
+
+</div>
+
+</div>
+
+</div>
+
+<div class="quelle fragment" data-fragment-index="9">
+
+Quelle: Anthropic Privacy Center, <a href="https://privacy.anthropic.com/en/articles/7996868-is-my-data-used-for-model-training" target="_blank" rel="noopener">Is my data used for model training?</a>; <a href="https://privacy.claude.com/en/articles/7996866" target="_blank" rel="noopener">How long do you store my organization’s data?</a>; <a href="https://privacy.claude.com/en/articles/10440198-configure-custom-data-retention-controls-for-enterprise-plans" target="_blank" rel="noopener">Configure custom data retention controls for Enterprise plans</a>
+
+</div>
+</div>
+
+</script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="smaller drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<p class="eyebrow">Teil IV · Projects, Artifacts, Qualität</p>
+
+## Eigene Prüfcheckliste
+
+<div class="card-grid">
+
+<div class="card fragment" data-fragment-index="1">
+
+<span class="card-title">Auftrag</span>
+
+Beantwortet das Ergebnis die gestellte Frage für die genannte Zielgruppe?
+
+</div>
+
+<div class="card fragment" data-fragment-index="2">
+
+<span class="card-title">Inhalt</span>
+
+Zahlen und Zusagen am Original geprüft, nachgerechnet, Bedingungen noch drin
+
+</div>
+
+<div class="card fragment" data-fragment-index="3">
+
+<span class="card-title">Quellen</span>
+
+Links geöffnet, die Aussage steht dort; Datum und Herkunft passen
+
+</div>
+
+<div class="card fragment" data-fragment-index="4">
+
+<span class="card-title">Daten</span>
+
+Nur Daten, die nach den Regeln Ihrer Organisation in Claude dürfen
+
+</div>
+
+<div class="card fragment" data-fragment-index="5">
+
+<span class="card-title">Weitergabe</span>
+
+Eine zweite Person liest gegen, wenn eine Entscheidung daran hängt
+
+</div>
+
+</div>
+
+<div class="tipp fragment" data-fragment-index="6">
+
+Legen Sie die Checkliste als Wissen in Ihr Project. Claude prüft den Entwurf dagegen vor, die Schlussprüfung machen Sie.
+
+</div>
+</div>
+
+</script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<p class="eyebrow">Teil IV · Projects, Artifacts, Qualität</p>
+
+## Zusammenfassung Teil IV
+
+<div class="numbered">
+
+- &shy;<!-- .element: class="fragment" data-fragment-index="1" -->Ein Project je Vorhaben oder wiederkehrender Aufgabe, mit Wissen und kurzen Project Instructions 
+- &shy;<!-- .element: class="fragment" data-fragment-index="2" -->Wissen als LLM Wiki pflegen: Originale unverändert, Seiten mit Quelle, Index und Änderungslog 
+- &shy;<!-- .element: class="fragment" data-fragment-index="3" -->Neue Quellen einarbeiten, ersetzte Angaben und Widersprüche markieren 
+- &shy;<!-- .element: class="fragment" data-fragment-index="4" -->Ergebnisse in Artifacts ausarbeiten, schrittweise verbessern und gezielt teilen 
+- &shy;<!-- .element: class="fragment" data-fragment-index="5" -->Ändert sich der Bedarf intern, muss neu bestätigen, wer zugesagt hat 
+- &shy;<!-- .element: class="fragment" data-fragment-index="6" -->Vor jeder Weitergabe: eigene Prüfcheckliste und die Regeln Ihrer Organisation 
+
+</div>
+</div>
+
+</script></section></section><section ><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<p class="eyebrow">Abschluss</p>
+
+## Ihr nächster Anwendungsfall
+
+- &shy;<!-- .element: class="fragment" data-fragment-index="1" -->**klein**: in einer Sitzung zu schaffen 
+- &shy;<!-- .element: class="fragment" data-fragment-index="2" -->**wiederkehrend**: lohnt sich als Vorlage oder Project 
+- &shy;<!-- .element: class="fragment" data-fragment-index="3" -->**prüfbar**: Sie erkennen, ob das Ergebnis stimmt 
+- &shy;<!-- .element: class="fragment" data-fragment-index="4" -->**ohne vertrauliche Daten** oder nach den Regeln Ihrer Organisation 
+
+<div class="fragment" data-fragment-index="5">
+
+```markdown
+Aufgabe:
+Rolle:
+Ziel:
+Kontext:
+Ausgabe:
+Kriterien:
+```
+
+</div>
+</div>
+
+</script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="title-slide drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<p class="kicker">Claude AI</p>
+
+# Vielen Dank
+
+<p class="subtitle">Fragen, Rückmeldungen, nächste Schritte</p>
+
+<p class="byline"><span class="author">Dr.-Ing. Grigory Devadze</span></p>
+</div></script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 720px; width: 1280px; min-height: 720px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+<p class="eyebrow">Abschluss</p>
+
+## Quellen
+
+- &shy;<!-- .element: class="fragment" data-fragment-index="1" -->**Anthropic**: Claude Help Center und Privacy Center (fehlerhafte Antworten, Kontextfenster, Projects, Artifacts, Dateien, Websuche, Research, Enterprise-Plan, Datennutzung), Stand Oktober 2026, <a href="https://support.claude.com" target="_blank" rel="noopener">support.claude.com</a> 
+- &shy;<!-- .element: class="fragment" data-fragment-index="2" -->**OpenAI, Microsoft, Google**: Hilfeseiten zu ChatGPT, Microsoft Copilot und Gemini, abgerufen am 29.10.2026 
+- &shy;<!-- .element: class="fragment" data-fragment-index="3" -->**Andrej Karpathy**: LLM Wiki, GitHub Gist, <a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f" target="_blank" rel="noopener">gist.github.com/karpathy</a> 
+- &shy;<!-- .element: class="fragment" data-fragment-index="4" -->**Sprachmodelle**: Vaswani et al., <a href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener">Attention Is All You Need</a>, 2017; Ouyang et al., <a href="https://arxiv.org/abs/2203.02155" target="_blank" rel="noopener">Training language models to follow instructions with human feedback</a>, 2022; Bai et al., <a href="https://arxiv.org/abs/2212.08073" target="_blank" rel="noopener">Constitutional AI</a>, 2022 
+- &shy;<!-- .element: class="fragment" data-fragment-index="5" -->**Rollenprompts**: Kassis, <a href="https://arxiv.org/abs/2610.00084" target="_blank" rel="noopener">Scientific Agents: Evaluating Profession-Specific System Prompts on Scientific Tasks</a>, 2026, Vorabveröffentlichung ohne Begutachtung 
+- &shy;<!-- .element: class="fragment" data-fragment-index="6" -->**DSGVO**: Verordnung (EU) 2016/679, <a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj" target="_blank" rel="noopener">EUR-Lex</a>
+</div></script></section></section></div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/obsidian-markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+
+    <script src="plugin/zoom/zoom.js"></script>
+    <script src="plugin/customcontrols/plugin.js"></script>
+
+
+    <script>
+        function extend() {
+            const target = {};
+            for (let i = 0; i < arguments.length; i++) {
+                const source = arguments[i];
+                for (const key in source) {
+                    if (source.hasOwnProperty(key)) {
+                        target[key] = source[key];
+                    }
+                }
+            }
+            return target;
+        }
+
+        function isLight(color) {
+            // normalize to rgb(a)
+            const optionEl = document.createElement("option");
+            optionEl.style.color = color;
+            const normalizedColor = optionEl.style.color;
+
+            const match = normalizedColor.match(/(\d+), (\d+), (\d+)/);
+            if (!match) return false;
+            const [, c_r, c_g, c_b] = match;
+
+            const brightness = ((c_r * 299) + (c_g * 587) + (c_b * 114)) / 1000;
+            return brightness > 155;
+        }
+
+        const bgColor = getComputedStyle(document.documentElement).getPropertyValue('--r-background-color').trim();
+
+        if (isLight(bgColor)) {
+            document.body.classList.add('has-light-background');
+        } else {
+            document.body.classList.add('has-dark-background');
+        }
+
+        // default options to init reveal.js
+        const defaultOptions = {
+            controls: true,
+            progress: true,
+            history: true,
+            center: true,
+            transition: 'default', // none/fade/slide/convex/concave/zoom
+            plugins: [
+                ObsidianMarkdown,
+                RevealHighlight,
+                RevealZoom,
+                RevealCustomControls,
+            ],
+            allottedTime: "120",
+
+            katex: {
+                local: 'plugin/math/katex',
+                extensions: ["mhchem"],
+            },
+            markdown: {
+                gfm: true,
+            },
+            mermaid: {
+                theme: isLight(bgColor) ? 'default' : 'dark',
+            },
+            customcontrols: {
+                controls: [
+                ]
+            },
+        };
+
+        if ( pageInIframe() ) {
+            defaultOptions.scrollActivationWidth = 5;
+        }
+
+        // options from URL query string
+        const queryOptions = Reveal().getQueryHash() || {};
+
+        const options = extend(defaultOptions, {"controls":true,"progress":true,"slideNumber":"c","center":false,"transition":"slide","transitionSpeed":"default","width":1280,"height":720,"margin":0.08,"navigationMode":"linear","fragments":false}, queryOptions);
+    </script>
+
+    <script>
+      /**
+       * KaTeX Equation Numbering Note
+       *
+       * KaTeX maintains a global equation counter for \begin{equation} environments.
+       * When navigating between slides, reveal.js math plugin may re-render math, causing
+       * equation numbers to change randomly.
+       *
+       * Note: Regular $$ blocks don't have equation numbers - only \begin{equation} does.
+       *
+       * If you experience issues with equation numbers changing:
+       * Use manual \tag{} commands: \begin{equation}\tag{1} ... \end{equation}
+       */
+
+      Reveal.initialize(options);
+    </script>
+    <!-- created with Slides Extended reveal.html template -->
+</body>
+</html>
