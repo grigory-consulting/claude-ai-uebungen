@@ -2,6 +2,11 @@
 
 Unterlagen für die Übungen eines eintägigen Seminars zu Claude (claude.ai). Alle Dokumente beschreiben einen **erfundenen Fall**; Organisationen, Anbieter, Preise und Termine sind ausgedacht.
 
+## Folien
+
+- Zum Mitlesen im Browser: <https://grigory-consulting.github.io/claude-ai-uebungen/claude-ai.html>
+- Als PDF: <https://grigory-consulting.github.io/claude-ai-uebungen/claude-ai-folien.pdf>
+
 ## Herunterladen
 
 1. Oben auf dieser Seite **Code** wählen, dann **Download ZIP**.
